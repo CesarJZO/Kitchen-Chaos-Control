@@ -1,22 +1,32 @@
 ﻿using System;
+using CodeMonkey.KitchenCaosControl.Input;
 using UnityEngine;
 
 namespace CodeMonkey.KitchenCaosControl.Player
 {
     public class Player : MonoBehaviour
     {
+        public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
+        public class OnSelectedCounterChangedEventArgs : EventArgs
+        {
+            public ClearCounter selectedCounter;
+        }
+
         [Header("Settings")]
         [SerializeField] private float moveSpeed;
         [SerializeField] private float rotationSpeed;
 
         [Header("Physics")]
         [SerializeField] private float playerRadius;
+        [SerializeField] private float interactDistance;
         [SerializeField] private LayerMask countersLayerMask;
 
         [Header("Dependencies")]
         [SerializeField] private GameInput gameInput;
 
         private Vector3 _lastMoveDirection;
+
+        private ClearCounter _selectedCounter;
 
         public bool IsWalking { get; private set; }
 
@@ -27,17 +37,8 @@ namespace CodeMonkey.KitchenCaosControl.Player
 
         private void GameInputOnInteractAction(object sender, EventArgs e)
         {
-            var moveDirection = gameInput.GetNormalizedMovementVector();
-
-            if (moveDirection != Vector3.zero)
-                _lastMoveDirection = moveDirection;
-
-            const float interactDistance = 2f;
-            if (!Physics.Raycast(transform.position, _lastMoveDirection, out var hitInfo, interactDistance,
-                    countersLayerMask)) return;
-
-            if (hitInfo.collider.TryGetComponent(out ClearCounter clearCounter))
-                clearCounter.Interact();
+            if (_selectedCounter)
+                _selectedCounter.Interact();
         }
 
         private void Update()
@@ -52,6 +53,28 @@ namespace CodeMonkey.KitchenCaosControl.Player
 
             if (moveDirection != Vector3.zero)
                 _lastMoveDirection = moveDirection;
+
+            if (Physics.Raycast(transform.position, _lastMoveDirection, out var hitInfo, interactDistance, countersLayerMask))
+            {
+                if (hitInfo.collider.TryGetComponent(out ClearCounter clearCounter))
+                {
+                    if (_selectedCounter != clearCounter)
+                        SetSelectedCounter(clearCounter);
+                }
+                else
+                    SetSelectedCounter(null);
+            }
+            else
+                SetSelectedCounter(null);
+
+            void SetSelectedCounter(ClearCounter clearCounter)
+            {
+                _selectedCounter = clearCounter;
+                OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs
+                {
+                    selectedCounter = _selectedCounter
+                });
+            }
         }
 
         private void HandleMovement()

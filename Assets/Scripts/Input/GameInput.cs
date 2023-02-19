@@ -1,9 +1,8 @@
 ﻿using System;
-using CodeMonkey.KitchenCaosControl.Input;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace CodeMonkey.KitchenCaosControl
+namespace CodeMonkey.KitchenCaosControl.Input
 {
     public class GameInput : MonoBehaviour
     {
