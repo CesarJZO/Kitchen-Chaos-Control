@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace CodeMonkey.KitchenCaosControl.Player
 {
@@ -7,14 +8,41 @@ namespace CodeMonkey.KitchenCaosControl.Player
         [Header("Settings")]
         [SerializeField] private float moveSpeed;
         [SerializeField] private float rotationSpeed;
+
+        [Header("Physics")]
         [SerializeField] private float playerRadius;
+        [SerializeField] private LayerMask countersLayerMask;
 
         [Header("Dependencies")]
         [SerializeField] private GameInput gameInput;
 
+        private Vector3 _lastMoveDirection;
+
         public bool IsWalking { get; private set; }
 
         private void Update()
+        {
+            HandleMovement();
+            HandleInteractions();
+        }
+
+        private void HandleInteractions()
+        {
+            var moveDirection = gameInput.GetNormalizedMovementVector();
+
+            if (moveDirection != Vector3.zero)
+                _lastMoveDirection = moveDirection;
+
+            const float interactDistance = 2f;
+            if (!Physics.Raycast(transform.position, _lastMoveDirection, out var hitInfo, interactDistance,
+                    countersLayerMask)) return;
+
+            if (hitInfo.collider.TryGetComponent(out ClearCounter clearCounter))
+                clearCounter.Interact();
+
+        }
+
+        private void HandleMovement()
         {
             var moveDirection = gameInput.GetNormalizedMovementVector();
             var t = transform;
