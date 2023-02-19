@@ -1,0 +1,23 @@
+﻿using UnityEngine;
+
+namespace CodeMonkey.KitchenCaosControl.Player
+{
+    public class PlayerAnimator : MonoBehaviour
+    {
+        private static readonly int Walk = Animator.StringToHash("IsWalking");
+
+        [SerializeField] private Player player;
+        [SerializeField] private Animator animator;
+
+        private void Awake()
+        {
+            if (!player) player = GetComponentInParent<Player>();
+            if (!animator) animator = GetComponent<Animator>();
+        }
+
+        private void LateUpdate()
+        {
+            animator.SetBool(Walk, player.IsWalking);
+        }
+    }
+}
