@@ -1,5 +1,4 @@
-﻿using System;
-using CodeMonkey.KitchenCaosControl.Input;
+﻿using CodeMonkey.KitchenCaosControl.Input;
 using UnityEngine;
 
 namespace CodeMonkey.KitchenCaosControl
