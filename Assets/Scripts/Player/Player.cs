@@ -20,13 +20,12 @@ namespace CodeMonkey.KitchenCaosControl.Player
 
         public bool IsWalking { get; private set; }
 
-        private void Update()
+        private void Start()
         {
-            HandleMovement();
-            HandleInteractions();
+            gameInput.OnInteractAction += GameInputOnInteractAction;
         }
 
-        private void HandleInteractions()
+        private void GameInputOnInteractAction(object sender, EventArgs e)
         {
             var moveDirection = gameInput.GetNormalizedMovementVector();
 
@@ -39,7 +38,20 @@ namespace CodeMonkey.KitchenCaosControl.Player
 
             if (hitInfo.collider.TryGetComponent(out ClearCounter clearCounter))
                 clearCounter.Interact();
+        }
 
+        private void Update()
+        {
+            HandleMovement();
+            HandleInteractions();
+        }
+
+        private void HandleInteractions()
+        {
+            var moveDirection = gameInput.GetNormalizedMovementVector();
+
+            if (moveDirection != Vector3.zero)
+                _lastMoveDirection = moveDirection;
         }
 
         private void HandleMovement()
@@ -83,7 +95,10 @@ namespace CodeMonkey.KitchenCaosControl.Player
             var forward = Vector3.Slerp(t.forward, moveDirection, Time.deltaTime * rotationSpeed);
             if (forward != Vector3.zero) t.forward = forward;
 
-            bool CapsuleCast(Vector3 direction) => Physics.CapsuleCast(position, position + Vector3.up, playerRadius, direction, moveDistance);
+            bool CapsuleCast(Vector3 direction)
+            {
+                return Physics.CapsuleCast(position, position + Vector3.up, playerRadius, direction, moveDistance);
+            }
         }
     }
 }
