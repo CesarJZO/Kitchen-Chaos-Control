@@ -7,19 +7,20 @@ namespace CodeMonkey.KitchenCaosControl.Player
         [SerializeField] private float moveSpeed;
         [SerializeField] private float rotationSpeed;
 
+        [Header("Dependencies")]
+        [SerializeField] private GameInput gameInput;
+
         public bool IsWalking { get; private set; }
 
         private void Update()
         {
-            var inputVector = new Vector3().normalized;
-
-            var moveDirection = new Vector3(inputVector.x, 0f, inputVector.y);
-
+            var moveDirection = gameInput.GetNormalizedMovementVector();
             var t = transform;
             t.position += moveDirection * (moveSpeed * Time.deltaTime);
-
             IsWalking = moveDirection != Vector3.zero;
-            t.forward = Vector3.Slerp(t.forward, moveDirection, Time.deltaTime * rotationSpeed);
+
+            var forward = Vector3.Slerp(t.forward, moveDirection, Time.deltaTime * rotationSpeed);
+            if (forward != Vector3.zero) t.forward = forward;
         }
     }
 }
