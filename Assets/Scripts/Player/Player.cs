@@ -6,6 +6,8 @@ namespace CodeMonkey.KitchenCaosControl.Player
 {
     public class Player : MonoBehaviour
     {
+        public static Player Instance { get; private set; }
+
         public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
         public class OnSelectedCounterChangedEventArgs : EventArgs
         {
@@ -29,6 +31,13 @@ namespace CodeMonkey.KitchenCaosControl.Player
         private ClearCounter _selectedCounter;
 
         public bool IsWalking { get; private set; }
+
+        private void Awake()
+        {
+            if (Instance)
+                Debug.LogError("There should only be one instance of Player!");
+            Instance = this;
+        }
 
         private void Start()
         {
