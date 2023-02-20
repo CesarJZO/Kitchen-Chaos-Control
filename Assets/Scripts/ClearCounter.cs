@@ -12,6 +12,7 @@ namespace CodeMonkey.KitchenCaosControl
         {
             var kitchenObjectTransform = Instantiate(kitchenObject.Prefab, counterTopPoint);
             kitchenObjectTransform.localPosition = Vector3.zero;
+            Debug.Log(kitchenObjectTransform.GetComponent<KitchenObjectManager>().KitchenObject.Name);
         }
     }
 }
