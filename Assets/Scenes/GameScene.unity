@@ -1204,6 +1204,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClearCounter
       objectReference: {fileID: 0}
+    - target: {fileID: 8685445460731021632, guid: 72e31fd913c1ba742b6a75361250f3c2,
+        type: 3}
+      propertyPath: kitchenObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f5d5e9fa71d20e4abc74daacf65ac3b,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

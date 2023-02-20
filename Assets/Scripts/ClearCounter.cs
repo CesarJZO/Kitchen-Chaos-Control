@@ -1,16 +1,17 @@
-﻿using UnityEngine;
+﻿using CodeMonkey.KitchenCaosControl.ScriptableObjects;
+using UnityEngine;
 
 namespace CodeMonkey.KitchenCaosControl
 {
     public class ClearCounter : MonoBehaviour
     {
-        [SerializeField] private Transform tomatoPrefab;
+        [SerializeField] private KitchenObject kitchenObject;
         [SerializeField] private Transform counterTopPoint;
 
         public void Interact()
         {
-            var tomatoTransform = Instantiate(tomatoPrefab, counterTopPoint);
-            tomatoTransform.localPosition = Vector3.zero;
+            var kitchenObjectTransform = Instantiate(kitchenObject.Prefab, counterTopPoint);
+            kitchenObjectTransform.localPosition = Vector3.zero;
         }
     }
 }
