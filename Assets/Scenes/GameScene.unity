@@ -291,6 +291,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 106851181}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &310841149 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8685445460731021632, guid: 72e31fd913c1ba742b6a75361250f3c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 65052747}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a3586751d5f46b09377385f34c43785, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1216,6 +1228,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClearCounter
       objectReference: {fileID: 0}
+    - target: {fileID: 8685445460731021632, guid: 72e31fd913c1ba742b6a75361250f3c2,
+        type: 3}
+      propertyPath: testing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8685445460731021632, guid: 72e31fd913c1ba742b6a75361250f3c2,
+        type: 3}
+      propertyPath: secondClearCounter
+      value: 
+      objectReference: {fileID: 310841149}
     - target: {fileID: 8685445460731021632, guid: 72e31fd913c1ba742b6a75361250f3c2,
         type: 3}
       propertyPath: kitchenScriptableObject
