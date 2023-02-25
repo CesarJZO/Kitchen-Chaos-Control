@@ -6,10 +6,13 @@ namespace CodeMonkey.KitchenCaosControl.Player
 {
     public class Player : MonoBehaviour
     {
+        /// <summary>
+        /// Instance of the player
+        /// </summary>
         public static Player Instance { get; private set; }
 
-        public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
-        public class OnSelectedCounterChangedEventArgs : EventArgs
+        public event EventHandler<OnSelectedCounterUpdatedEventArgs> OnSelectedCounterUpdated;
+        public class OnSelectedCounterUpdatedEventArgs : EventArgs
         {
             public ClearCounter selectedCounter;
         }
@@ -60,8 +63,10 @@ namespace CodeMonkey.KitchenCaosControl.Player
         {
             var moveDirection = gameInput.GetNormalizedMovementVector();
 
+            // If we're moving, update the last move direction
             if (moveDirection != Vector3.zero)
                 _lastMoveDirection = moveDirection;
+
 
             if (Physics.Raycast(transform.position, _lastMoveDirection, out var hitInfo, interactDistance, countersLayerMask))
             {
@@ -79,7 +84,7 @@ namespace CodeMonkey.KitchenCaosControl.Player
             void SetSelectedCounter(ClearCounter clearCounter)
             {
                 _selectedCounter = clearCounter;
-                OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs
+                OnSelectedCounterUpdated?.Invoke(this, new OnSelectedCounterUpdatedEventArgs
                 {
                     selectedCounter = _selectedCounter
                 });

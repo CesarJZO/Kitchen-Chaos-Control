@@ -5,14 +5,18 @@ namespace CodeMonkey.KitchenCaosControl
 {
     public class ClearCounter : MonoBehaviour
     {
-        [SerializeField] private KitchenObject kitchenObject;
+        [SerializeField] private KitchenObjectSO kitchenObjectSo;
         [SerializeField] private Transform counterTopPoint;
+
+        private KitchenObject _kitchenObject;
 
         public void Interact()
         {
-            var kitchenObjectTransform = Instantiate(kitchenObject.Prefab, counterTopPoint);
+            if (!kitchenObjectSo) return;
+            var kitchenObjectTransform = Instantiate(kitchenObjectSo.Prefab, counterTopPoint);
             kitchenObjectTransform.localPosition = Vector3.zero;
-            Debug.Log(kitchenObjectTransform.GetComponent<KitchenObjectManager>().KitchenObject.Name);
+
+            _kitchenObject = kitchenObjectTransform.GetComponent<KitchenObject>();
         }
     }
 }

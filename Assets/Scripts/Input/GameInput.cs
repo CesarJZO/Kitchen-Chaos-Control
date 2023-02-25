@@ -21,6 +21,10 @@ namespace CodeMonkey.KitchenCaosControl.Input
             OnInteractAction?.Invoke(this, EventArgs.Empty);
         }
 
+        /// <summary>
+        /// Returns a normalized movement vector on the XZ plane, based on the input
+        /// </summary>
+        /// <returns>Vector with the form of x: n, y: 0, z: n</returns>
         public Vector3 GetNormalizedMovementVector()
         {
             var inputVector = _inputActions.Player.Move.ReadValue<Vector2>();
