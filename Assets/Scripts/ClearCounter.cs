@@ -11,21 +11,24 @@ namespace CodeMonkey.KitchenCaosControl
 
         private KitchenObjectBehaviour _currentKitchenObject;
 
+        public KitchenObjectBehaviour KitchenObject
+        {
+            get => _currentKitchenObject;
+            set => _currentKitchenObject = value;
+        }
+
+        public void ClearKitchenObject() => _currentKitchenObject = null;
+
+        public bool HasKitchenObject => _currentKitchenObject;
+
         public void Interact()
         {
             // If there is no current kitchen object, add one
-            if (!_currentKitchenObject)
-            {
-                var kitchenObject = Instantiate(kitchenScriptableObject.Prefab, counterTopPoint);
-                kitchenObject.transform.localPosition = Vector3.zero;
-
-                _currentKitchenObject = kitchenObject;
-                _currentKitchenObject.ClearCounter = this;
-            }
-            else
-            {
-                Debug.Log(_currentKitchenObject.ClearCounter.name);
-            }
+            if (_currentKitchenObject) return;
+            var kitchenObject = Instantiate(kitchenScriptableObject.Prefab, counterTopPoint);
+            /* There's no need to set the current kitchen object's clear counter to this, because the kitchen object's
+                clear counter will be set by the kitchen object */
+            kitchenObject.ClearCounter = this;
         }
     }
 }
