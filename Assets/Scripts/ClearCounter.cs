@@ -5,18 +5,27 @@ namespace CodeMonkey.KitchenCaosControl
 {
     public class ClearCounter : MonoBehaviour
     {
-        [SerializeField] private KitchenObjectSO kitchenObjectSo;
+        [SerializeField] private KitchenScriptableObject kitchenScriptableObject;
         [SerializeField] private Transform counterTopPoint;
+        public Transform CounterTopPoint => counterTopPoint;
 
-        private KitchenObject _kitchenObject;
+        private KitchenObjectBehaviour _currentKitchenObject;
 
         public void Interact()
         {
-            if (!kitchenObjectSo) return;
-            var kitchenObjectTransform = Instantiate(kitchenObjectSo.Prefab, counterTopPoint);
-            kitchenObjectTransform.localPosition = Vector3.zero;
+            // If there is no current kitchen object, add one
+            if (!_currentKitchenObject)
+            {
+                var kitchenObject = Instantiate(kitchenScriptableObject.Prefab, counterTopPoint);
+                kitchenObject.transform.localPosition = Vector3.zero;
 
-            _kitchenObject = kitchenObjectTransform.GetComponent<KitchenObject>();
+                _currentKitchenObject = kitchenObject;
+                _currentKitchenObject.ClearCounter = this;
+            }
+            else
+            {
+                Debug.Log(_currentKitchenObject.ClearCounter.name);
+            }
         }
     }
 }
