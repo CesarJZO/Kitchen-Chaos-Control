@@ -8,34 +8,28 @@ namespace CodeMonkey.KitchenCaosControl
         [SerializeField] private KitchenScriptableObject kitchenScriptableObject;
         public KitchenScriptableObject KitchenScriptableObject => kitchenScriptableObject;
 
-        private ClearCounter _clearCounter;
+        private IKitchenObjectParent _kitchenObjectParent;
 
         /// <summary>
-        /// When a new counter is set, this object will be parented to the counter and teleported to the new counter's position.
-        /// Otherwise, it will just return the current counter.
+        /// Sets the parent of this object to the given parent, and clears the old parent's kitchen object.
+        /// Also teleports this object to the new parent's position.
         /// </summary>
-        public ClearCounter ClearCounter
+        public void SetAndTeleportToParent(IKitchenObjectParent parent)
         {
-            get => _clearCounter;
-            set
-            {
-                var newClearCounter = value;
-                // If this object has a counter, clear it
-                if (_clearCounter)
-                    _clearCounter.ClearKitchenObject();
+            // If this object has a counter, clear it
+            _kitchenObjectParent?.ClearKitchenObject();
 
-                // Set the new counter
-                _clearCounter = newClearCounter;
+            // Set the new counter
+            _kitchenObjectParent = parent;
 
-                if (newClearCounter.HasKitchenObject)
-                    Debug.LogError("New counter already has a kitchen object! This should never happen!");
-                newClearCounter.KitchenObject = this;
+            if (parent.HasKitchenObject())
+                Debug.LogError("Parent already has a kitchen object! This should never happen!");
+            parent.SetKitchenObject(this);
 
-                // Parent this object to the new counter and teleport it to the new counter's position
-                var t = transform;
-                t.parent = newClearCounter.CounterTopPoint;
-                t.localPosition = Vector3.zero;
-            }
+            // Parent this object to the new counter and teleport it to the new counter's position
+            var t = transform;
+            t.parent = parent.GetFollowParentFollowPoint();
+            t.localPosition = Vector3.zero;
         }
     }
 }

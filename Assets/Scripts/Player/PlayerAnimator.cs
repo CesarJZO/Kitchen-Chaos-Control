@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CodeMonkey.KitchenCaosControl.Player
+namespace CodeMonkey.KitchenCaosControl
 {
     public class PlayerAnimator : MonoBehaviour
     {

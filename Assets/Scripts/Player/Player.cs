@@ -2,9 +2,9 @@
 using CodeMonkey.KitchenCaosControl.Input;
 using UnityEngine;
 
-namespace CodeMonkey.KitchenCaosControl.Player
+namespace CodeMonkey.KitchenCaosControl
 {
-    public class Player : MonoBehaviour
+    public class Player : MonoBehaviour, IKitchenObjectParent
     {
         /// <summary>
         /// Instance of the player
@@ -16,6 +16,9 @@ namespace CodeMonkey.KitchenCaosControl.Player
         {
             public ClearCounter selectedCounter;
         }
+
+        [Header("Status")]
+        [SerializeField] private Transform kitchenObjectHoldPoint;
 
         [Header("Settings")]
         [SerializeField] private float moveSpeed;
@@ -32,6 +35,7 @@ namespace CodeMonkey.KitchenCaosControl.Player
         private Vector3 _lastMoveDirection;
 
         private ClearCounter _selectedCounter;
+        private KitchenObjectBehaviour _currentKitchenObject;
 
         public bool IsWalking { get; private set; }
 
@@ -50,7 +54,7 @@ namespace CodeMonkey.KitchenCaosControl.Player
         private void GameInputOnInteractAction(object sender, EventArgs e)
         {
             if (_selectedCounter)
-                _selectedCounter.Interact();
+                _selectedCounter.Interact(this);
         }
 
         private void Update()
@@ -137,5 +141,15 @@ namespace CodeMonkey.KitchenCaosControl.Player
                 return Physics.CapsuleCast(position, position + Vector3.up, playerRadius, direction, moveDistance);
             }
         }
+
+        public Transform GetFollowParentFollowPoint() => kitchenObjectHoldPoint;
+
+        public void SetKitchenObject(KitchenObjectBehaviour kitchenObject) => _currentKitchenObject = kitchenObject;
+
+        public KitchenObjectBehaviour GetKitchenObject() => _currentKitchenObject;
+
+        public void ClearKitchenObject() => _currentKitchenObject = null;
+
+        public bool HasKitchenObject() => _currentKitchenObject;
     }
 }

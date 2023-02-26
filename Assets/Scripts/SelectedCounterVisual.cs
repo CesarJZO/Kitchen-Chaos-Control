@@ -9,10 +9,10 @@ namespace CodeMonkey.KitchenCaosControl
 
         private void Start()
         {
-            Player.Player.Instance.OnSelectedCounterUpdated += PlayerOnSelectedCounterUpdated;
+            Player.Instance.OnSelectedCounterUpdated += PlayerOnSelectedCounterUpdated;
         }
 
-        private void PlayerOnSelectedCounterUpdated(object sender, Player.Player.OnSelectedCounterUpdatedEventArgs e)
+        private void PlayerOnSelectedCounterUpdated(object sender, Player.OnSelectedCounterUpdatedEventArgs e)
         {
             visualGameObject.SetActive(e.selectedCounter == clearCounter);
         }
