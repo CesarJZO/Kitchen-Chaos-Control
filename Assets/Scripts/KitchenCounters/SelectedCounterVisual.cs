@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CodeMonkey.KitchenCaosControl
+namespace CodeMonkey.KitchenCaosControl.KitchenCounters
 {
     public class SelectedCounterVisual : MonoBehaviour
     {

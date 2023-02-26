@@ -1,16 +1,16 @@
 ﻿using CodeMonkey.KitchenCaosControl.ScriptableObjects;
 using UnityEngine;
 
-namespace CodeMonkey.KitchenCaosControl
+namespace CodeMonkey.KitchenCaosControl.KitchenCounters
 {
-    public class ClearCounter : MonoBehaviour, IKitchenObjectParent
+    public class ClearCounter : BaseCounter, IKitchenObjectParent
     {
         [SerializeField] private KitchenScriptableObject kitchenScriptableObject;
         [SerializeField] private Transform counterTopPoint;
 
         private KitchenObjectBehaviour _currentKitchenObject;
 
-        public void Interact(Player player)
+        public override void Interact(Player player)
         {
             // If there is no current kitchen object, add one
             if (!_currentKitchenObject)
@@ -28,7 +28,7 @@ namespace CodeMonkey.KitchenCaosControl
 
         public bool HasKitchenObject() => _currentKitchenObject;
 
-        public Transform GetFollowParentFollowPoint() => counterTopPoint;
+        public Transform GetParentFollowPoint() => counterTopPoint;
 
         public void SetKitchenObject(KitchenObjectBehaviour kitchenObject) => _currentKitchenObject = kitchenObject;
 

@@ -4,7 +4,7 @@ namespace CodeMonkey.KitchenCaosControl
 {
     public interface IKitchenObjectParent
     {
-        public Transform GetFollowParentFollowPoint();
+        public Transform GetParentFollowPoint();
 
         public void SetKitchenObject(KitchenObjectBehaviour kitchenObject);
 

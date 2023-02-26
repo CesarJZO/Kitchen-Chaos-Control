@@ -1,5 +1,6 @@
 ﻿using System;
 using CodeMonkey.KitchenCaosControl.Input;
+using CodeMonkey.KitchenCaosControl.KitchenCounters;
 using UnityEngine;
 
 namespace CodeMonkey.KitchenCaosControl
@@ -14,7 +15,7 @@ namespace CodeMonkey.KitchenCaosControl
         public event EventHandler<OnSelectedCounterUpdatedEventArgs> OnSelectedCounterUpdated;
         public class OnSelectedCounterUpdatedEventArgs : EventArgs
         {
-            public ClearCounter selectedCounter;
+            public BaseCounter selectedCounter;
         }
 
         [Header("Status")]
@@ -34,7 +35,7 @@ namespace CodeMonkey.KitchenCaosControl
 
         private Vector3 _lastMoveDirection;
 
-        private ClearCounter _selectedCounter;
+        private BaseCounter _selectedCounter;
         private KitchenObjectBehaviour _currentKitchenObject;
 
         public bool IsWalking { get; private set; }
@@ -74,10 +75,10 @@ namespace CodeMonkey.KitchenCaosControl
 
             if (Physics.Raycast(transform.position, _lastMoveDirection, out var hitInfo, interactDistance, countersLayerMask))
             {
-                if (hitInfo.collider.TryGetComponent(out ClearCounter clearCounter))
+                if (hitInfo.collider.TryGetComponent(out BaseCounter counter))
                 {
-                    if (_selectedCounter != clearCounter)
-                        SetSelectedCounter(clearCounter);
+                    if (_selectedCounter != counter)
+                        SetSelectedCounter(counter);
                 }
                 else
                     SetSelectedCounter(null);
@@ -85,9 +86,9 @@ namespace CodeMonkey.KitchenCaosControl
             else
                 SetSelectedCounter(null);
 
-            void SetSelectedCounter(ClearCounter clearCounter)
+            void SetSelectedCounter(BaseCounter counter)
             {
-                _selectedCounter = clearCounter;
+                _selectedCounter = counter;
                 OnSelectedCounterUpdated?.Invoke(this, new OnSelectedCounterUpdatedEventArgs
                 {
                     selectedCounter = _selectedCounter
@@ -142,7 +143,7 @@ namespace CodeMonkey.KitchenCaosControl
             }
         }
 
-        public Transform GetFollowParentFollowPoint() => kitchenObjectHoldPoint;
+        public Transform GetParentFollowPoint() => kitchenObjectHoldPoint;
 
         public void SetKitchenObject(KitchenObjectBehaviour kitchenObject) => _currentKitchenObject = kitchenObject;
 

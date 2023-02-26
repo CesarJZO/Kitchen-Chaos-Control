@@ -28,7 +28,7 @@ namespace CodeMonkey.KitchenCaosControl
 
             // Parent this object to the new counter and teleport it to the new counter's position
             var t = transform;
-            t.parent = parent.GetFollowParentFollowPoint();
+            t.parent = parent.GetParentFollowPoint();
             t.localPosition = Vector3.zero;
         }
     }
