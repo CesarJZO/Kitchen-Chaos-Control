@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace CodeMonkey.KitchenCaosControl
 {
-    public class KitchenObjectBehaviour : MonoBehaviour
+    public class KitchenObject : MonoBehaviour
     {
         [SerializeField] private KitchenScriptableObject kitchenScriptableObject;
         public KitchenScriptableObject KitchenScriptableObject => kitchenScriptableObject;
@@ -13,6 +13,7 @@ namespace CodeMonkey.KitchenCaosControl
         /// <summary>
         /// Sets the parent of this object to the given parent, and clears the old parent's kitchen object.
         /// Also teleports this object to the new parent's position.
+        /// If parent already has a kitchen object, this will do nothing.
         /// </summary>
         public void SetAndTeleportToParent(IKitchenObjectParent parent)
         {
@@ -31,6 +32,19 @@ namespace CodeMonkey.KitchenCaosControl
             var t = transform;
             t.parent = parent.GetParentFollowPoint();
             t.localPosition = Vector3.zero;
+        }
+
+        public void DestroySelf()
+        {
+            _kitchenObjectParent.ClearKitchenObject();
+            Destroy(gameObject);
+        }
+
+        public static KitchenObject SpawnKitchenObject(KitchenScriptableObject kitchenScriptableObject, IKitchenObjectParent parent)
+        {
+            var kitchenObject = Instantiate(kitchenScriptableObject.Prefab);
+            kitchenObject.SetAndTeleportToParent(parent);
+            return kitchenObject;
         }
     }
 }

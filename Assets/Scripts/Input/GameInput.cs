@@ -7,6 +7,7 @@ namespace CodeMonkey.KitchenCaosControl.Input
     public class GameInput : MonoBehaviour
     {
         public event EventHandler OnInteractAction;
+        public event EventHandler OnInteractAlternateAction;
         private PlayerInputActions _inputActions;
 
         private void Awake()
@@ -14,6 +15,12 @@ namespace CodeMonkey.KitchenCaosControl.Input
             _inputActions = new PlayerInputActions();
             _inputActions.Player.Enable();
             _inputActions.Player.Interact.performed += OnInteractPerformed;
+            _inputActions.Player.InteractAlternate.performed += OnInteractAlternatePerformed;
+        }
+
+        private void OnInteractAlternatePerformed(InputAction.CallbackContext obj)
+        {
+            OnInteractAlternateAction?.Invoke(this, EventArgs.Empty);
         }
 
         private void OnInteractPerformed(InputAction.CallbackContext obj)

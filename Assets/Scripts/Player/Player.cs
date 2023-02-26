@@ -36,7 +36,7 @@ namespace CodeMonkey.KitchenCaosControl
         private Vector3 _lastMoveDirection;
 
         private BaseCounter _selectedCounter;
-        private KitchenObjectBehaviour _currentKitchenObject;
+        private KitchenObject _currentKitchenObject;
 
         public bool IsWalking { get; private set; }
         public float SpeedMultiplier { get; private set; }
@@ -51,6 +51,13 @@ namespace CodeMonkey.KitchenCaosControl
         private void Start()
         {
             gameInput.OnInteractAction += GameInputOnInteractAction;
+            gameInput.OnInteractAlternateAction += GameInputOnInteractAlternateAction;
+        }
+
+        private void GameInputOnInteractAlternateAction(object sender, EventArgs e)
+        {
+            if (_selectedCounter)
+                _selectedCounter.InteractAlternate(this);
         }
 
         private void GameInputOnInteractAction(object sender, EventArgs e)
@@ -148,9 +155,9 @@ namespace CodeMonkey.KitchenCaosControl
 
         public Transform GetParentFollowPoint() => kitchenObjectHoldPoint;
 
-        public void SetKitchenObject(KitchenObjectBehaviour kitchenObject) => _currentKitchenObject = kitchenObject;
+        public void SetKitchenObject(KitchenObject kitchenObject) => _currentKitchenObject = kitchenObject;
 
-        public KitchenObjectBehaviour GetKitchenObject() => _currentKitchenObject;
+        public KitchenObject GetKitchenObject() => _currentKitchenObject;
 
         public void ClearKitchenObject() => _currentKitchenObject = null;
 

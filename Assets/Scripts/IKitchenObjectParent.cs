@@ -6,9 +6,9 @@ namespace CodeMonkey.KitchenCaosControl
     {
         public Transform GetParentFollowPoint();
 
-        public void SetKitchenObject(KitchenObjectBehaviour kitchenObject);
+        public void SetKitchenObject(KitchenObject kitchenObject);
 
-        public KitchenObjectBehaviour GetKitchenObject();
+        public KitchenObject GetKitchenObject();
 
         public void ClearKitchenObject();
 

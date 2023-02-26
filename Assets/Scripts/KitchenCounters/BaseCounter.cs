@@ -1,5 +1,4 @@
-﻿using CodeMonkey.KitchenCaosControl.ScriptableObjects;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace CodeMonkey.KitchenCaosControl.KitchenCounters
 {
@@ -7,17 +6,19 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
     {
         [SerializeField] private Transform counterTopPoint;
 
-        private KitchenObjectBehaviour _currentKitchenObject;
+        private KitchenObject _currentKitchenObject;
 
         public abstract void Interact(Player player);
+
+        public virtual void InteractAlternate(Player player) { }
 
         public bool HasKitchenObject() => _currentKitchenObject;
 
         public Transform GetParentFollowPoint() => counterTopPoint;
 
-        public void SetKitchenObject(KitchenObjectBehaviour kitchenObject) => _currentKitchenObject = kitchenObject;
+        public void SetKitchenObject(KitchenObject kitchenObject) => _currentKitchenObject = kitchenObject;
 
-        public KitchenObjectBehaviour GetKitchenObject() => _currentKitchenObject;
+        public KitchenObject GetKitchenObject() => _currentKitchenObject;
 
         public void ClearKitchenObject() => _currentKitchenObject = null;
     }
