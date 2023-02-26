@@ -34,7 +34,7 @@ namespace CodeMonkey.KitchenCaosControl.Input
                     ""type"": ""Value"",
                     ""id"": ""4e4373c4-2122-4172-81f0-7f6c64d15f13"",
                     ""expectedControlType"": ""Vector2"",
-                    ""processors"": ""NormalizeVector2"",
+                    ""processors"": ""StickDeadzone"",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
@@ -42,6 +42,15 @@ namespace CodeMonkey.KitchenCaosControl.Input
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""798937cc-9d97-4304-808a-607c42d821ba"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InteractAlternate"",
+                    ""type"": ""Button"",
+                    ""id"": ""e6315d53-42ca-46fb-bcfa-20b51f9f95d1"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -94,9 +103,31 @@ namespace CodeMonkey.KitchenCaosControl.Input
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""up"",
+                    ""id"": ""1e347463-be65-47a8-abb5-40f8414c0de2"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": ""down"",
                     ""id"": ""dad765f4-9319-48a0-aa6e-ed26120f4dab"",
                     ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""e49b77db-d326-4966-8711-143d763f77c8"",
+                    ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -116,9 +147,31 @@ namespace CodeMonkey.KitchenCaosControl.Input
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""left"",
+                    ""id"": ""9461715b-f876-45f0-9f96-810768f82376"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": ""right"",
                     ""id"": ""61909239-0697-445d-a024-b9bba88b93f0"",
                     ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""c12ce311-bb3e-4ba3-8454-a83f6968abcd"",
+                    ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -139,8 +192,63 @@ namespace CodeMonkey.KitchenCaosControl.Input
                 },
                 {
                     ""name"": """",
-                    ""id"": ""14a64e4b-5c58-417d-bfe1-d9147f94c2ec"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""id"": ""36c22413-05e4-42ec-88c5-b1df85aafa2b"",
+                    ""path"": ""<SwitchProControllerHID>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a5954504-2c57-453e-b03c-a1d53371a9ec"",
+                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ca0479ae-091f-431d-98f2-fdcf6693fe80"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InteractAlternate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""49b53d37-77d4-4a15-af94-91ab52779694"",
+                    ""path"": ""<XInputController>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InteractAlternate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""04c0f1f4-868d-4ecf-ade7-afa946720a7e"",
+                    ""path"": ""<SwitchProControllerHID>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InteractAlternate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6b1c4867-8d66-4139-b9ff-b59bb5d35101"",
+                    ""path"": ""<DualShockGamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -157,6 +265,7 @@ namespace CodeMonkey.KitchenCaosControl.Input
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
             m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+            m_Player_InteractAlternate = m_Player.FindAction("InteractAlternate", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -220,12 +329,14 @@ namespace CodeMonkey.KitchenCaosControl.Input
         private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
         private readonly InputAction m_Player_Move;
         private readonly InputAction m_Player_Interact;
+        private readonly InputAction m_Player_InteractAlternate;
         public struct PlayerActions
         {
             private @PlayerInputActions m_Wrapper;
             public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Player_Move;
             public InputAction @Interact => m_Wrapper.m_Player_Interact;
+            public InputAction @InteractAlternate => m_Wrapper.m_Player_InteractAlternate;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -241,6 +352,9 @@ namespace CodeMonkey.KitchenCaosControl.Input
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @InteractAlternate.started += instance.OnInteractAlternate;
+                @InteractAlternate.performed += instance.OnInteractAlternate;
+                @InteractAlternate.canceled += instance.OnInteractAlternate;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -251,6 +365,9 @@ namespace CodeMonkey.KitchenCaosControl.Input
                 @Interact.started -= instance.OnInteract;
                 @Interact.performed -= instance.OnInteract;
                 @Interact.canceled -= instance.OnInteract;
+                @InteractAlternate.started -= instance.OnInteractAlternate;
+                @InteractAlternate.performed -= instance.OnInteractAlternate;
+                @InteractAlternate.canceled -= instance.OnInteractAlternate;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -272,6 +389,7 @@ namespace CodeMonkey.KitchenCaosControl.Input
         {
             void OnMove(InputAction.CallbackContext context);
             void OnInteract(InputAction.CallbackContext context);
+            void OnInteractAlternate(InputAction.CallbackContext context);
         }
     }
 }

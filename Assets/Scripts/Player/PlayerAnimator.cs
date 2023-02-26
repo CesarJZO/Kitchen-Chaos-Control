@@ -17,6 +17,7 @@ namespace CodeMonkey.KitchenCaosControl
 
         private void LateUpdate()
         {
+            animator.speed = player.IsWalking ? player.SpeedMultiplier : 1f;
             animator.SetBool(Walk, player.IsWalking);
         }
     }

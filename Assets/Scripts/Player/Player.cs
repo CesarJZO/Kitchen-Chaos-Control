@@ -39,6 +39,7 @@ namespace CodeMonkey.KitchenCaosControl
         private KitchenObjectBehaviour _currentKitchenObject;
 
         public bool IsWalking { get; private set; }
+        public float SpeedMultiplier { get; private set; }
 
         private void Awake()
         {
@@ -66,7 +67,7 @@ namespace CodeMonkey.KitchenCaosControl
 
         private void HandleInteractions()
         {
-            var moveDirection = gameInput.GetNormalizedMovementVector();
+            var moveDirection = gameInput.GetMovementDirection();
 
             // If we're moving, update the last move direction
             if (moveDirection != Vector3.zero)
@@ -98,7 +99,8 @@ namespace CodeMonkey.KitchenCaosControl
 
         private void HandleMovement()
         {
-            var moveDirection = gameInput.GetNormalizedMovementVector();
+            var moveDirection = gameInput.GetMovementDirection();
+            SpeedMultiplier = moveDirection.magnitude;
             var t = transform;
             var position = t.position;
 
@@ -110,8 +112,9 @@ namespace CodeMonkey.KitchenCaosControl
                 // Cannot move towards the direction, try to move sideways
 
                 // Attempt only x movement
-                var moveDirectionX = new Vector3(moveDirection.x, 0f, 0f).normalized;
-                canMove = moveDirection.x != 0f && !CapsuleCast(moveDirectionX);
+                var moveDirectionX = new Vector3(moveDirection.x, 0f, 0f);
+                var perpendicularDeadZone = 0.5f;
+                canMove = Mathf.Abs(moveDirection.x) > perpendicularDeadZone && !CapsuleCast(moveDirectionX);
 
                 if (canMove)
                 {
@@ -121,8 +124,8 @@ namespace CodeMonkey.KitchenCaosControl
                 else
                 {
                     // Attempt only z movement
-                    var moveDirectionZ = new Vector3(0f, 0f, moveDirection.z).normalized;
-                    canMove = moveDirection.x != 0f && !CapsuleCast(moveDirectionZ);
+                    var moveDirectionZ = new Vector3(0f, 0f, moveDirection.z);
+                    canMove = Mathf.Abs(moveDirection.z) > perpendicularDeadZone && !CapsuleCast(moveDirectionZ);
                     if (canMove) // Can move only on the z
                         moveDirection = moveDirectionZ;
                     // else cannot move at all

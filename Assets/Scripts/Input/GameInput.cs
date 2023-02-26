@@ -22,13 +22,15 @@ namespace CodeMonkey.KitchenCaosControl.Input
         }
 
         /// <summary>
-        /// Returns a normalized movement vector on the XZ plane, based on the input
+        /// Returns a movement vector on the XZ plane, based on the input.
         /// </summary>
-        /// <returns>Vector with the form of x: n, y: 0, z: n</returns>
-        public Vector3 GetNormalizedMovementVector()
+        /// <param name="maxMagnitude">Maximum magnitude of the vector, 1 by default</param>
+        /// <returns>Clamped vector on the XZ plane</returns>
+        public Vector3 GetMovementDirection(float maxMagnitude = 1f)
         {
             var inputVector = _inputActions.Player.Move.ReadValue<Vector2>();
-            return new Vector3(inputVector.x, 0f, inputVector.y);
+            var xzDirection = new Vector3(inputVector.x, 0f, inputVector.y);
+            return Vector3.ClampMagnitude(xzDirection, maxMagnitude);
         }
     }
 }
