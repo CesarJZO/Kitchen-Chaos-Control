@@ -141,8 +141,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 934f373e0e724873b1c8014ff1fceda9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearCounter: {fileID: 1803242964447501919}
-  visualGameObject: {fileID: 7215821016459995548}
+  counter: {fileID: 1803242964447501919}
+  visualGameObjects:
+  - {fileID: 7215821016459995548}
 --- !u!1 &7215821016459995548 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8489276541531669327, guid: 0004cb1e11ad014419b943c7da960724,

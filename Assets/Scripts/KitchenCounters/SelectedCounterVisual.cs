@@ -4,8 +4,8 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
 {
     public class SelectedCounterVisual : MonoBehaviour
     {
-        [SerializeField] private ClearCounter clearCounter;
-        [SerializeField] private GameObject visualGameObject;
+        [SerializeField] private BaseCounter counter;
+        [SerializeField] private GameObject[] visualGameObjects;
 
         private void Start()
         {
@@ -14,7 +14,8 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
 
         private void PlayerOnSelectedCounterUpdated(object sender, Player.OnSelectedCounterUpdatedEventArgs e)
         {
-            visualGameObject.SetActive(e.selectedCounter == clearCounter);
+            foreach (var visualGameObject in visualGameObjects)
+                visualGameObject.SetActive(e.selectedCounter == counter);
         }
     }
 }
