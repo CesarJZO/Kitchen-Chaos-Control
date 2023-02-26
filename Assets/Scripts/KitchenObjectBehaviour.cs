@@ -16,6 +16,7 @@ namespace CodeMonkey.KitchenCaosControl
         /// </summary>
         public void SetAndTeleportToParent(IKitchenObjectParent parent)
         {
+            if (parent.HasKitchenObject()) return;
             // If this object has a counter, clear it
             _kitchenObjectParent?.ClearKitchenObject();
 

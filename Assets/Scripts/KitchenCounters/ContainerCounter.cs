@@ -12,8 +12,10 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
 
         public override void Interact(Player player)
         {
+            if (player.HasKitchenObject()) return;
             var kitchenObject = Instantiate(kitchenScriptableObject.Prefab);
             kitchenObject.SetAndTeleportToParent(player);
+
             OnPlayerGrabbedObject?.Invoke(this, EventArgs.Empty);
         }
     }
