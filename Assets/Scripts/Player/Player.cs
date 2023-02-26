@@ -111,7 +111,7 @@ namespace CodeMonkey.KitchenCaosControl
 
                 // Attempt only x movement
                 var moveDirectionX = new Vector3(moveDirection.x, 0f, 0f).normalized;
-                canMove = !CapsuleCast(moveDirectionX);
+                canMove = moveDirection.x != 0f && !CapsuleCast(moveDirectionX);
 
                 if (canMove)
                 {
@@ -122,7 +122,7 @@ namespace CodeMonkey.KitchenCaosControl
                 {
                     // Attempt only z movement
                     var moveDirectionZ = new Vector3(0f, 0f, moveDirection.z).normalized;
-                    canMove = !CapsuleCast(moveDirectionZ);
+                    canMove = moveDirection.x != 0f && !CapsuleCast(moveDirectionZ);
                     if (canMove) // Can move only on the z
                         moveDirection = moveDirectionZ;
                     // else cannot move at all
