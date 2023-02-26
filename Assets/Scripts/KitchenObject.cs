@@ -34,12 +34,21 @@ namespace CodeMonkey.KitchenCaosControl
             t.localPosition = Vector3.zero;
         }
 
+        /// <summary>
+        /// Clears the parent of this object, and destroys this object.
+        /// </summary>
         public void DestroySelf()
         {
             _kitchenObjectParent.ClearKitchenObject();
             Destroy(gameObject);
         }
 
+        /// <summary>
+        /// Spawns a kitchen object at the given parent.
+        /// </summary>
+        /// <param name="kitchenScriptableObject">The ScriptableObject containing the data of a KitchenObject.</param>
+        /// <param name="parent">The parent who going to hold the KitchenObject.</param>
+        /// <returns></returns>
         public static KitchenObject SpawnKitchenObject(KitchenScriptableObject kitchenScriptableObject, IKitchenObjectParent parent)
         {
             var kitchenObject = Instantiate(kitchenScriptableObject.Prefab);
