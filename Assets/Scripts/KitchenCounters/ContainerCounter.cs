@@ -8,12 +8,12 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
     {
         public event EventHandler OnPlayerGrabbedObject;
 
-        [SerializeField] private KitchenScriptableObject kitchenScriptableObject;
+        [SerializeField] private KitchenObjectData kitchenObjectData;
 
         public override void Interact(Player player)
         {
             if (player.HasKitchenObject()) return;
-            KitchenObject.SpawnKitchenObject(kitchenScriptableObject, player);
+            KitchenObject.SpawnKitchenObject(kitchenObjectData, player);
 
             OnPlayerGrabbedObject?.Invoke(this, EventArgs.Empty);
         }

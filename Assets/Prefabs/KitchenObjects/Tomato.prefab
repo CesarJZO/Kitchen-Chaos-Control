@@ -31,7 +31,7 @@ Transform:
   m_Children:
   - {fileID: 9190779881566841599}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5926529239860379905
 MonoBehaviour:
@@ -45,8 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2717374df7fe4cf18bacaf6ebf2bbfc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kitchenScriptableObject: {fileID: 11400000, guid: 726baaadfdc868b4185ade31e7b665fb,
-    type: 2}
+  kitchenObjectData: {fileID: 11400000, guid: 726baaadfdc868b4185ade31e7b665fb, type: 2}
 --- !u!1001 &5433094392806227071
 PrefabInstance:
   m_ObjectHideFlags: 0

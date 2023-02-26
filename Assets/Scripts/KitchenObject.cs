@@ -5,8 +5,8 @@ namespace CodeMonkey.KitchenCaosControl
 {
     public class KitchenObject : MonoBehaviour
     {
-        [SerializeField] private KitchenScriptableObject kitchenScriptableObject;
-        public KitchenScriptableObject KitchenScriptableObject => kitchenScriptableObject;
+        [SerializeField] private KitchenObjectData kitchenObjectData;
+        public KitchenObjectData Data => kitchenObjectData;
 
         private IKitchenObjectParent _kitchenObjectParent;
 
@@ -15,22 +15,22 @@ namespace CodeMonkey.KitchenCaosControl
         /// Also teleports this object to the new parent's position.
         /// If parent already has a kitchen object, this will do nothing.
         /// </summary>
-        public void SetAndTeleportToParent(IKitchenObjectParent parent)
+        public void SetAndTeleportToParent(IKitchenObjectParent newParent)
         {
-            if (parent.HasKitchenObject()) return;
-            // If this object has a counter, clear it
+            if (newParent.HasKitchenObject()) return;
+            // If this object has a parent, clear it
             _kitchenObjectParent?.ClearKitchenObject();
 
-            // Set the new counter
-            _kitchenObjectParent = parent;
+            // Set new parent
+            _kitchenObjectParent = newParent;
 
-            if (parent.HasKitchenObject())
+            if (newParent.HasKitchenObject())
                 Debug.LogError("Parent already has a kitchen object! This should never happen!");
-            parent.SetKitchenObject(this);
+            newParent.SetKitchenObject(this);
 
             // Parent this object to the new counter and teleport it to the new counter's position
             var t = transform;
-            t.parent = parent.GetParentFollowPoint();
+            t.parent = newParent.GetParentFollowPoint();
             t.localPosition = Vector3.zero;
         }
 
@@ -46,12 +46,12 @@ namespace CodeMonkey.KitchenCaosControl
         /// <summary>
         /// Spawns a kitchen object at the given parent.
         /// </summary>
-        /// <param name="kitchenScriptableObject">The ScriptableObject containing the data of a KitchenObject.</param>
+        /// <param name="data">The ScriptableObject containing the data of a KitchenObject.</param>
         /// <param name="parent">The parent who going to hold the KitchenObject.</param>
         /// <returns></returns>
-        public static KitchenObject SpawnKitchenObject(KitchenScriptableObject kitchenScriptableObject, IKitchenObjectParent parent)
+        public static KitchenObject SpawnKitchenObject(KitchenObjectData data, IKitchenObjectParent parent)
         {
-            var kitchenObject = Instantiate(kitchenScriptableObject.Prefab);
+            var kitchenObject = Instantiate(data.Prefab);
             kitchenObject.SetAndTeleportToParent(parent);
             return kitchenObject;
         }

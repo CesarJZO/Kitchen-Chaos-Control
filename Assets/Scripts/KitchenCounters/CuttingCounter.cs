@@ -5,7 +5,7 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
 {
     public class CuttingCounter : BaseCounter
     {
-        [SerializeField] private KitchenScriptableObject cutKitchenScriptableObject;
+        [SerializeField] private KitchenObjectData cutKitchenObjectData;
 
         public override void Interact(Player player)
         {
@@ -20,7 +20,7 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
             if (!HasKitchenObject()) return;
 
             GetKitchenObject().DestroySelf();
-            KitchenObject.SpawnKitchenObject(cutKitchenScriptableObject, this);
+            KitchenObject.SpawnKitchenObject(cutKitchenObjectData, this);
         }
     }
 }

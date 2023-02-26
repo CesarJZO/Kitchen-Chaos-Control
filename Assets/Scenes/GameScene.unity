@@ -1256,6 +1256,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6867634117602427775, guid: 3234d3fa060149c45903d4cb5591a217,
         type: 3}
+      propertyPath: cutKitchenObjectData
+      value: 
+      objectReference: {fileID: 11400000, guid: 653d69afca34d174a9cf350b17e418da,
+        type: 2}
+    - target: {fileID: 6867634117602427775, guid: 3234d3fa060149c45903d4cb5591a217,
+        type: 3}
       propertyPath: cutKitchenScriptableObject
       value: 
       objectReference: {fileID: 11400000, guid: 653d69afca34d174a9cf350b17e418da,

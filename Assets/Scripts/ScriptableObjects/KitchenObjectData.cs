@@ -3,7 +3,7 @@
 namespace CodeMonkey.KitchenCaosControl.ScriptableObjects
 {
     [CreateAssetMenu]
-    public class KitchenScriptableObject : ScriptableObject
+    public class KitchenObjectData : ScriptableObject
     {
         [field:SerializeField] public KitchenObject Prefab { get; private set; }
         [field:SerializeField] public Sprite Sprite { get; private set; }
