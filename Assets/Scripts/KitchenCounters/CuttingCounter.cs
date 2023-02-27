@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CodeMonkey.KitchenCaosControl.KitchenCounters
 {
-    public class CuttingCounter : BaseCounter
+    public class CuttingCounter : Counter
     {
         [SerializeField] private CuttingRecipe[] cuttingRecipes;
 

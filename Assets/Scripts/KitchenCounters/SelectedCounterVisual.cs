@@ -4,7 +4,7 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
 {
     public class SelectedCounterVisual : MonoBehaviour
     {
-        [SerializeField] private BaseCounter counter;
+        [SerializeField] private Counter counter;
         [SerializeField] private GameObject[] visualGameObjects;
 
         private void Start()

@@ -15,7 +15,7 @@ namespace CodeMonkey.KitchenCaosControl
         public event EventHandler<OnSelectedCounterUpdatedEventArgs> OnSelectedCounterUpdated;
         public class OnSelectedCounterUpdatedEventArgs : EventArgs
         {
-            public BaseCounter selectedCounter;
+            public Counter selectedCounter;
         }
 
         [Header("Status")]
@@ -35,7 +35,7 @@ namespace CodeMonkey.KitchenCaosControl
 
         private Vector3 _lastMoveDirection;
 
-        private BaseCounter _selectedCounter;
+        private Counter _selectedCounter;
         private KitchenObject _currentKitchenObject;
 
         public bool IsWalking { get; private set; }
@@ -83,7 +83,7 @@ namespace CodeMonkey.KitchenCaosControl
 
             if (Physics.Raycast(transform.position, _lastMoveDirection, out var hitInfo, interactDistance, countersLayerMask))
             {
-                if (hitInfo.collider.TryGetComponent(out BaseCounter counter))
+                if (hitInfo.collider.TryGetComponent(out Counter counter))
                 {
                     if (_selectedCounter != counter)
                         SetSelectedCounter(counter);
@@ -94,7 +94,7 @@ namespace CodeMonkey.KitchenCaosControl
             else
                 SetSelectedCounter(null);
 
-            void SetSelectedCounter(BaseCounter counter)
+            void SetSelectedCounter(Counter counter)
             {
                 _selectedCounter = counter;
                 OnSelectedCounterUpdated?.Invoke(this, new OnSelectedCounterUpdatedEventArgs

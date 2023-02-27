@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CodeMonkey.KitchenCaosControl.KitchenCounters
 {
-    public class ContainerCounter : BaseCounter
+    public class ContainerCounter : Counter
     {
         public event EventHandler OnPlayerGrabbedObject;
 

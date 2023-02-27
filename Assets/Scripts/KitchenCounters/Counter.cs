@@ -2,7 +2,7 @@
 
 namespace CodeMonkey.KitchenCaosControl.KitchenCounters
 {
-    public abstract class BaseCounter : MonoBehaviour, IKitchenObjectParent
+    public abstract class Counter : MonoBehaviour, IKitchenObjectParent
     {
         [SerializeField] private Transform counterTopPoint;
 

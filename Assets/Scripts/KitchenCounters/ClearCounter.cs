@@ -1,6 +1,6 @@
 ﻿namespace CodeMonkey.KitchenCaosControl.KitchenCounters
 {
-    public class ClearCounter : BaseCounter
+    public class ClearCounter : Counter
     {
         public override void Interact(Player player)
         {
