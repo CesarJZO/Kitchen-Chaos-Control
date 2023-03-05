@@ -79,7 +79,7 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
         /// Returns the cutting recipe for the given input, or null if there is none
         /// </summary>
         /// <param name="input">If it is referenced as input in a recipe, returns the recipe.
-        /// Null if there is no matc</param>
+        /// Null if there is no match</param>
         private CuttingRecipe GetRecipeWithInput(KitchenObjectData input)
         {
             // Select the possible output of the cutting recipe
