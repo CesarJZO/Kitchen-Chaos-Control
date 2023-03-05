@@ -7,7 +7,13 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
 {
     public class StoveCounter : Counter
     {
-        private enum State
+        public event EventHandler<OnStateChangedEventArgs> OnStateChanged;
+        public class OnStateChangedEventArgs : EventArgs
+        {
+            public State state;
+        }
+
+        public enum State
         {
             Idle,
             Frying,
@@ -47,6 +53,7 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
                     _currentBurningRecipe = GetBurningRecipeWithInput(GetKitchenObject().Data);
 
                     _state = State.Fried;
+                    OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = _state });
                     break;
                 case State.Fried:
                     _burningTimer += Time.deltaTime;
@@ -56,6 +63,7 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
                     KitchenObject.SpawnKitchenObject(_currentBurningRecipe.Output, this);
                     _burningTimer = 0f;
                     _state = State.Burned;
+                    OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = _state });
                     break;
                 case State.Burned: break;
                 default: throw new ArgumentOutOfRangeException();
@@ -67,7 +75,10 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
             if (HasKitchenObject())
             {
                 if (!player.HasKitchenObject())
+                {
                     _state = State.Idle;
+                    OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = _state });
+                }
                 GetKitchenObject().SetAndTeleportToParent(player);
             }
             else if (player.HasKitchenObject() && HasRecipe(player.GetKitchenObject()))
@@ -76,6 +87,7 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
                 _currentFryingRecipe = GetFryingRecipeWithInput(GetKitchenObject().Data);
                 _state = State.Frying;
                 _fryingTimer = 0f;
+                OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = _state });
             }
 
             bool HasRecipe(KitchenObject input)
