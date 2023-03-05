@@ -5,8 +5,9 @@ using UnityEngine;
 
 namespace CodeMonkey.KitchenCaosControl.KitchenCounters
 {
-    public class StoveCounter : Counter
+    public class StoveCounter : Counter, IHasProgress
     {
+        public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
         public event EventHandler<OnStateChangedEventArgs> OnStateChanged;
         public class OnStateChangedEventArgs : EventArgs
         {
@@ -44,6 +45,11 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
                 case State.Idle: break;
                 case State.Frying:
                     _fryingTimer += Time.deltaTime;
+                    OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+                    {
+                        progressNormalized = _fryingTimer / _currentFryingRecipe.FryingMaxTime
+                    });
+
                     if (_fryingTimer < _currentFryingRecipe.FryingMaxTime) return;
 
                     GetKitchenObject().DestroySelf();
@@ -57,6 +63,11 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
                     break;
                 case State.Fried:
                     _burningTimer += Time.deltaTime;
+                    OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+                    {
+                        progressNormalized = _burningTimer / _currentBurningRecipe.BurningMaxTime
+                    });
+
                     if (_burningTimer < _currentBurningRecipe.BurningMaxTime) return;
 
                     GetKitchenObject().DestroySelf();
@@ -64,6 +75,10 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
                     _burningTimer = 0f;
                     _state = State.Burned;
                     OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = _state });
+                    OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+                    {
+                        progressNormalized = 0f
+                    });
                     break;
                 case State.Burned: break;
                 default: throw new ArgumentOutOfRangeException();
@@ -78,6 +93,10 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
                 {
                     _state = State.Idle;
                     OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = _state });
+                    OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+                    {
+                        progressNormalized = 0f
+                    });
                 }
                 GetKitchenObject().SetAndTeleportToParent(player);
             }
@@ -88,6 +107,10 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
                 _state = State.Frying;
                 _fryingTimer = 0f;
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = _state });
+                OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+                {
+                    progressNormalized = _fryingTimer / _currentFryingRecipe.FryingMaxTime
+                });
             }
 
             bool HasRecipe(KitchenObject input)

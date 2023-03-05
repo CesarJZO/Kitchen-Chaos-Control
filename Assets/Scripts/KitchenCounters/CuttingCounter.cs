@@ -5,14 +5,9 @@ using UnityEngine;
 
 namespace CodeMonkey.KitchenCaosControl.KitchenCounters
 {
-    public class CuttingCounter : Counter
+    public class CuttingCounter : Counter, IHasProgress
     {
-        public event EventHandler<OnCuttingProgressChangedEventArgs> OnCuttingProgressChanged;
-        public class OnCuttingProgressChangedEventArgs : EventArgs
-        {
-            public float progressNormalized;
-        }
-
+        public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
         public event EventHandler OnCut;
 
         [SerializeField] private CuttingRecipe[] cuttingRecipes;
@@ -28,7 +23,7 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
                 player.GetKitchenObject().SetAndTeleportToParent(this);
                 _cuttingProgress = 0;
                 var cuttingRecipe = GetRecipeWithInput(GetKitchenObject().Data);
-                OnCuttingProgressChanged?.Invoke(this, new OnCuttingProgressChangedEventArgs
+                OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
                 {
                     progressNormalized = _cuttingProgress / (float) cuttingRecipe.CuttingProgressRequired
                 });
@@ -54,7 +49,7 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
 
             // Check if the cutting progress is enough to slice the object
             var cuttingRecipe = GetRecipeWithInput(kitchenObject.Data);
-            OnCuttingProgressChanged?.Invoke(this, new OnCuttingProgressChangedEventArgs
+            OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
             {
                 progressNormalized = _cuttingProgress / (float) cuttingRecipe.CuttingProgressRequired
             });
