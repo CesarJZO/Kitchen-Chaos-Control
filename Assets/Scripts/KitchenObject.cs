@@ -51,6 +51,8 @@ namespace CodeMonkey.KitchenCaosControl
         /// <returns></returns>
         public static KitchenObject SpawnKitchenObject(KitchenObjectData data, IKitchenObjectParent parent)
         {
+            if (parent.HasKitchenObject())
+                Debug.LogError("Parent already has a kitchen object");
             var kitchenObject = Instantiate(data.Prefab);
             kitchenObject.SetAndTeleportToParent(parent);
             return kitchenObject;
