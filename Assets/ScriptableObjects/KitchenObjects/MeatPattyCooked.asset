@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81ce828c88d243cfa42a5fee0f2e803e, type: 3}
   m_Name: MeatPattyCooked
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 5926529239860379905, guid: 5735788e471bd0e4b91584c283feea4c,
+  <Prefab>k__BackingField: {fileID: 860235301050723274, guid: 5735788e471bd0e4b91584c283feea4c,
     type: 3}
   <Sprite>k__BackingField: {fileID: 21300000, guid: f1f50c7ef90b19741b26f2040806cf56,
     type: 3}

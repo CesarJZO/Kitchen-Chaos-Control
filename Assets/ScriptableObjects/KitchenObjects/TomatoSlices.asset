@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81ce828c88d243cfa42a5fee0f2e803e, type: 3}
   m_Name: TomatoSlices
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 5926529239860379905, guid: c1525e3e3de038c44ad56c4097c737ad,
+  <Prefab>k__BackingField: {fileID: 860235301050723274, guid: c1525e3e3de038c44ad56c4097c737ad,
     type: 3}
   <Sprite>k__BackingField: {fileID: 21300000, guid: c9f08c3c1ae2a364aaeaa3712540b1d4,
     type: 3}

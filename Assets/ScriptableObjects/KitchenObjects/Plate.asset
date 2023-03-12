@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81ce828c88d243cfa42a5fee0f2e803e, type: 3}
   m_Name: Plate
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 5926529239860379905, guid: 592affa496622da44a30fb0e5d7d50a0,
+  <Prefab>k__BackingField: {fileID: 7326392358189296485, guid: 592affa496622da44a30fb0e5d7d50a0,
     type: 3}
   <Sprite>k__BackingField: {fileID: 21300000, guid: 3928afb5321bb3d489bbd4ac581b29a2,
     type: 3}

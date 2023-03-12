@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1234914071901977482
+--- !u!1 &5220503693002649784
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 860235301050723274}
-  - component: {fileID: 5926529239860379905}
+  - component: {fileID: 7326392358189296485}
+  - component: {fileID: 5835804878573949062}
   m_Layer: 0
   m_Name: Plate
   m_TagString: Untagged
@@ -17,42 +17,42 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &860235301050723274
+--- !u!4 &7326392358189296485
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1234914071901977482}
+  m_GameObject: {fileID: 5220503693002649784}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8075845233642540268}
+  - {fileID: 3036905765288670781}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5926529239860379905
+--- !u!114 &5835804878573949062
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1234914071901977482}
+  m_GameObject: {fileID: 5220503693002649784}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2717374df7fe4cf18bacaf6ebf2bbfc8, type: 3}
+  m_Script: {fileID: 11500000, guid: a2214518e83c473b97060463d179ab63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   kitchenObjectData: {fileID: 11400000, guid: 4366efae37a81ba4e80a1a3caa74cad5, type: 2}
---- !u!1001 &4970044864590977644
+--- !u!1001 &2220079723825160381
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 860235301050723274}
+    m_TransformParent: {fileID: 7326392358189296485}
     m_Modifications:
     - target: {fileID: 3812876574508226176, guid: c0c9afd619b40914a8f625c0535e2284,
         type: 3}
@@ -119,9 +119,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0c9afd619b40914a8f625c0535e2284, type: 3}
---- !u!4 &8075845233642540268 stripped
+--- !u!4 &3036905765288670781 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3812876574508226176, guid: c0c9afd619b40914a8f625c0535e2284,
     type: 3}
-  m_PrefabInstance: {fileID: 4970044864590977644}
+  m_PrefabInstance: {fileID: 2220079723825160381}
   m_PrefabAsset: {fileID: 0}

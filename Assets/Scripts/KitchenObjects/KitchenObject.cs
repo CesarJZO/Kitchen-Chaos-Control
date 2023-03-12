@@ -17,7 +17,8 @@ namespace CodeMonkey.KitchenCaosControl
         /// </summary>
         public void SetAndTeleportToParent(IKitchenObjectParent newParent)
         {
-            if (newParent.HasKitchenObject()) return;
+            // if (newParent.HasKitchenObject()) return;
+
             // If this object has a parent, clear it
             _kitchenObjectParent?.ClearKitchenObject();
 
@@ -25,7 +26,7 @@ namespace CodeMonkey.KitchenCaosControl
             _kitchenObjectParent = newParent;
 
             if (newParent.HasKitchenObject())
-                Debug.LogError("Parent already has a kitchen object! This should never happen!");
+                Debug.LogError("Parent already has a kitchen object");
             newParent.SetKitchenObject(this);
 
             // Parent this object to the new counter and teleport it to the new counter's position
@@ -53,7 +54,7 @@ namespace CodeMonkey.KitchenCaosControl
         {
             if (parent.HasKitchenObject())
                 Debug.LogError("Parent already has a kitchen object");
-            var kitchenObject = Instantiate(data.Prefab);
+            var kitchenObject = Instantiate(data.Prefab).GetComponent<KitchenObject>();
             kitchenObject.SetAndTeleportToParent(parent);
             return kitchenObject;
         }

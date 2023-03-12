@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81ce828c88d243cfa42a5fee0f2e803e, type: 3}
   m_Name: Bread
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 5926529239860379905, guid: f286dba441b02174c8ed60a88eca79f8,
+  <Prefab>k__BackingField: {fileID: 860235301050723274, guid: f286dba441b02174c8ed60a88eca79f8,
     type: 3}
   <Sprite>k__BackingField: {fileID: 21300000, guid: 77b28124b8bda494381c80bd5aa42c22,
     type: 3}

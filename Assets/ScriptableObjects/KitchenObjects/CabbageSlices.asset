@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81ce828c88d243cfa42a5fee0f2e803e, type: 3}
   m_Name: CabbageSlices
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 5926529239860379905, guid: 9869090a046782a4482b37fdde49f8c3,
+  <Prefab>k__BackingField: {fileID: 860235301050723274, guid: 9869090a046782a4482b37fdde49f8c3,
     type: 3}
   <Sprite>k__BackingField: {fileID: 21300000, guid: bee24f07c57157e45a946eed3bfe8b84,
     type: 3}
