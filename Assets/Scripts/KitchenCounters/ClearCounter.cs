@@ -13,12 +13,12 @@
             {
                 if (player.HasKitchenObject())
                 {
-                    if (player.GetKitchenObject() is PlateKitchenObject)
-                    {
-                        var plateKitchenObject = player.GetKitchenObject() as PlateKitchenObject;
-                        plateKitchenObject.AddIngredient(GetKitchenObject().Data);
+                    if (player.GetKitchenObject() is not PlateKitchenObject) return;
+
+                    var plateKitchenObject = player.GetKitchenObject() as PlateKitchenObject;
+
+                    if (plateKitchenObject!.TryAddIngredient(GetKitchenObject().Data))
                         GetKitchenObject().DestroySelf();
-                    }
                 }
                 else
                     GetKitchenObject().SetAndTeleportToParent(player);
