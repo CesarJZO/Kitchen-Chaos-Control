@@ -18,6 +18,14 @@
                         if (plateKitchenObject.TryAddIngredient(GetKitchenObject().Data))
                             GetKitchenObject().DestroySelf();
                     }
+                    else
+                    {
+                        if (GetKitchenObject().TryGetPlate(out plateKitchenObject))
+                        {
+                            if (plateKitchenObject.TryAddIngredient(player.GetKitchenObject().Data))
+                                player.GetKitchenObject().DestroySelf();
+                        }
+                    }
                 }
                 else
                     GetKitchenObject().SetAndTeleportToParent(player);
