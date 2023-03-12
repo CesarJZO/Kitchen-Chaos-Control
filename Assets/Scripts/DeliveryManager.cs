@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CodeMonkey.KitchenCaosControl.ScriptableObjects;
 using UnityEngine;
 
@@ -36,46 +37,27 @@ namespace CodeMonkey.KitchenCaosControl
 
         public void DeliverRecipe(PlateKitchenObject plateKitchenObject)
         {
-            for (int i = 0; i < _waitingRecipeList.Count; i++)
+            for (var i = 0; i < _waitingRecipeList.Count; i++)
             {
                 var waitingRecipe = _waitingRecipeList[i];
 
                 if (waitingRecipe.ingredients.Count != plateKitchenObject.Ingredients.Count) continue;
 
-                var plateContentsMatchesRecipe = true;
-                foreach (var ingredient in waitingRecipe.ingredients)
-                {
-                    var ingredientFound = false;
-                    // Cycling through all ingredients in the recipe
-                    foreach (var plateIngredient in plateKitchenObject.Ingredients)
-                    {
-                        // Cycling through all ingredients on the plate
-                        if (plateIngredient == ingredient)
-                        {
-                            // Ingredients match
-                            ingredientFound = true;
-                            break;
-                        }
-                    }
-                    if (!ingredientFound)
-                    {
-                        // Ingredient not found on the plate
-                        plateContentsMatchesRecipe = false;
-                        break;
-                    }
-                }
+                var plateContentsMatchesRecipe = waitingRecipe.ingredients
+                    .Select(ingredient => plateKitchenObject.Ingredients
+                        .Any(plateIngredient => plateIngredient == ingredient))
+                    .All(ingredientFound => ingredientFound);
 
-                if (plateContentsMatchesRecipe)
-                {
-                    // Recipe delivered
-                    Debug.Log("Recipe delivered: " + waitingRecipe.recipeName);
-                    _waitingRecipeList.RemoveAt(i);
-                    return;
-                }
+                if (!plateContentsMatchesRecipe) continue;
+
+                // Recipe delivered
+                Debug.Log("Recipe delivered: " + waitingRecipe.recipeName);
+                _waitingRecipeList.RemoveAt(i);
+                return;
             }
 
             // No matches found
-            Debug.Log("Player delivered the wrong recipe");
+            Debug.Log("Player did not deliver a correct recipe!");
         }
     }
 }
