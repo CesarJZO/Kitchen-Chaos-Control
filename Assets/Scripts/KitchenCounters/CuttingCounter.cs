@@ -16,17 +16,33 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
 
         public override void Interact(Player player)
         {
-            if (HasKitchenObject())
-                GetKitchenObject().SetAndTeleportToParent(player);
-            else if (player.HasKitchenObject() && HasRecipe(player.GetKitchenObject()))
+            if (!HasKitchenObject())
             {
-                player.GetKitchenObject().SetAndTeleportToParent(this);
-                _cuttingProgress = 0;
-                var cuttingRecipe = GetRecipeWithInput(GetKitchenObject().Data);
-                OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+                if (player.HasKitchenObject() && HasRecipe(player.GetKitchenObject()))
                 {
-                    progressNormalized = _cuttingProgress / (float) cuttingRecipe.CuttingProgressRequired
-                });
+                    player.GetKitchenObject().SetAndTeleportToParent(this);
+                    _cuttingProgress = 0;
+                    var cuttingRecipe = GetRecipeWithInput(GetKitchenObject().Data);
+                    OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+                    {
+                        progressNormalized = _cuttingProgress / (float)cuttingRecipe.CuttingProgressRequired
+                    });
+                }
+            }
+            else
+            {
+                if (player.HasKitchenObject())
+                {
+                    if (player.GetKitchenObject().TryGetPlate(out var plateKitchenObject))
+                    {
+                        if (plateKitchenObject.TryAddIngredient(GetKitchenObject().Data))
+                            GetKitchenObject().DestroySelf();
+                    }
+                }
+                else
+                {
+                    GetKitchenObject().SetAndTeleportToParent(player);
+                }
             }
 
             bool HasRecipe(KitchenObject input)

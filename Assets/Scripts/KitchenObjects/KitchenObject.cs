@@ -17,8 +17,6 @@ namespace CodeMonkey.KitchenCaosControl
         /// </summary>
         public void SetAndTeleportToParent(IKitchenObjectParent newParent)
         {
-            // if (newParent.HasKitchenObject()) return;
-
             // If this object has a parent, clear it
             _kitchenObjectParent?.ClearKitchenObject();
 
@@ -42,6 +40,18 @@ namespace CodeMonkey.KitchenCaosControl
         {
             _kitchenObjectParent.ClearKitchenObject();
             Destroy(gameObject);
+        }
+
+        public bool TryGetPlate(out PlateKitchenObject plate)
+        {
+            if (this is PlateKitchenObject plateKitchenObject)
+            {
+                plate = plateKitchenObject;
+                return true;
+            }
+
+            plate = null;
+            return false;
         }
 
         /// <summary>

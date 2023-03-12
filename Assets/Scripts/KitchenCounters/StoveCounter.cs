@@ -87,10 +87,42 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
 
         public override void Interact(Player player)
         {
-            if (HasKitchenObject())
+            if (!HasKitchenObject())
             {
-                if (!player.HasKitchenObject())
+                if (player.HasKitchenObject() && HasRecipe(player.GetKitchenObject()))
                 {
+                    player.GetKitchenObject().SetAndTeleportToParent(this);
+                    _currentFryingRecipe = GetFryingRecipeWithInput(GetKitchenObject().Data);
+                    _state = State.Frying;
+                    _fryingTimer = 0f;
+                    OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = _state });
+                    OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+                    {
+                        progressNormalized = _fryingTimer / _currentFryingRecipe.FryingMaxTime
+                    });
+                }
+            }
+            else
+            {
+                if (player.HasKitchenObject())
+                {
+                    if (player.GetKitchenObject().TryGetPlate(out var plateKitchenObject))
+                    {
+                        if (plateKitchenObject.TryAddIngredient(GetKitchenObject().Data))
+                        {
+                            GetKitchenObject().DestroySelf();
+                            _state = State.Idle;
+                            OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = _state });
+                            OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+                            {
+                                progressNormalized = 0f
+                            });
+                        }
+                    }
+                }
+                else
+                {
+                    GetKitchenObject().SetAndTeleportToParent(player);
                     _state = State.Idle;
                     OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = _state });
                     OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
@@ -98,19 +130,6 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
                         progressNormalized = 0f
                     });
                 }
-                GetKitchenObject().SetAndTeleportToParent(player);
-            }
-            else if (player.HasKitchenObject() && HasRecipe(player.GetKitchenObject()))
-            {
-                player.GetKitchenObject().SetAndTeleportToParent(this);
-                _currentFryingRecipe = GetFryingRecipeWithInput(GetKitchenObject().Data);
-                _state = State.Frying;
-                _fryingTimer = 0f;
-                OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = _state });
-                OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
-                {
-                    progressNormalized = _fryingTimer / _currentFryingRecipe.FryingMaxTime
-                });
             }
 
             bool HasRecipe(KitchenObject input)
