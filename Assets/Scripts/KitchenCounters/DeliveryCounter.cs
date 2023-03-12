@@ -6,8 +6,11 @@
         {
             if (!player.HasKitchenObject()) return;
 
-            if (player.GetKitchenObject().TryGetPlate(out _))
-                player.GetKitchenObject().DestroySelf();
+            if (!player.GetKitchenObject().TryGetPlate(out var plateKitchenObject)) return;
+
+            DeliveryManager.Instance.DeliverRecipe(plateKitchenObject);
+
+            player.GetKitchenObject().DestroySelf();
         }
     }
 }
