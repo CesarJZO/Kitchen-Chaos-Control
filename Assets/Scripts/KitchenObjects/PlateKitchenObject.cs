@@ -15,20 +15,20 @@ namespace CodeMonkey.KitchenCaosControl
         }
 
         [SerializeField] private List<KitchenObjectData> validIngredients;
-        private List<KitchenObjectData> _ingredients;
+        public List<KitchenObjectData> Ingredients { get; private set; }
 
         private void Awake()
         {
-            _ingredients = new List<KitchenObjectData>();
+            Ingredients = new List<KitchenObjectData>();
         }
 
         public bool TryAddIngredient(KitchenObjectData ingredientData)
         {
             if (!validIngredients.Contains(ingredientData)) return false;
 
-            if (_ingredients.Contains(ingredientData)) return false;
+            if (Ingredients.Contains(ingredientData)) return false;
 
-            _ingredients.Add(ingredientData);
+            Ingredients.Add(ingredientData);
 
             OnIngredientAdded?.Invoke(this, new OnIngredientAddedEventArgs
             {
