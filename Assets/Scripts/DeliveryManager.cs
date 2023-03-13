@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CodeMonkey.KitchenCaosControl.ScriptableObjects;
 using UnityEngine;
@@ -7,6 +8,9 @@ namespace CodeMonkey.KitchenCaosControl
 {
     public class DeliveryManager : MonoBehaviour
     {
+        public event EventHandler OnRecipeSpawned;
+        public event EventHandler OnRecipeDelivered;
+
         public static DeliveryManager Instance { get; private set; }
 
         [SerializeField] private float spawnRecipeTime;
@@ -14,12 +18,12 @@ namespace CodeMonkey.KitchenCaosControl
 
         [Tooltip("Reference to the only instance of the RecipeList scriptable object. Useful if multiple objects need to access the same list of recipes.")]
         [SerializeField] private RecipeList recipeList;
-        private List<Recipe> _waitingRecipeList;
+        public List<Recipe> WaitingRecipeList { get; private set; }
 
         private void Awake()
         {
             Instance = this;
-            _waitingRecipeList = new List<Recipe>();
+            WaitingRecipeList = new List<Recipe>();
         }
 
         private void Start()
@@ -29,17 +33,18 @@ namespace CodeMonkey.KitchenCaosControl
 
         private void SpawnRecipe()
         {
-            if (_waitingRecipeList.Count >= maxWaitingRecipes) return;
-            var waitingRecipe = recipeList.recipes[Random.Range(0, recipeList.recipes.Count -1)];
-            Debug.Log(waitingRecipe.recipeName);
-            _waitingRecipeList.Add(waitingRecipe);
+            if (WaitingRecipeList.Count >= maxWaitingRecipes) return;
+            var waitingRecipe = recipeList.recipes[UnityEngine.Random.Range(0, recipeList.recipes.Count)];
+            WaitingRecipeList.Add(waitingRecipe);
+
+            OnRecipeSpawned?.Invoke(this, EventArgs.Empty);
         }
 
         public void DeliverRecipe(PlateKitchenObject plateKitchenObject)
         {
-            for (var i = 0; i < _waitingRecipeList.Count; i++)
+            for (var i = 0; i < WaitingRecipeList.Count; i++)
             {
-                var waitingRecipe = _waitingRecipeList[i];
+                var waitingRecipe = WaitingRecipeList[i];
 
                 if (waitingRecipe.ingredients.Count != plateKitchenObject.Ingredients.Count) continue;
 
@@ -51,13 +56,11 @@ namespace CodeMonkey.KitchenCaosControl
                 if (!plateContentsMatchesRecipe) continue;
 
                 // Recipe delivered
-                Debug.Log("Recipe delivered: " + waitingRecipe.recipeName);
-                _waitingRecipeList.RemoveAt(i);
-                return;
+                WaitingRecipeList.RemoveAt(i);
+                break;
             }
 
-            // No matches found
-            Debug.Log("Player did not deliver a correct recipe!");
+            OnRecipeDelivered?.Invoke(this, EventArgs.Empty);
         }
     }
 }
