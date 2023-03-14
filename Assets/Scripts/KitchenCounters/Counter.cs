@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace CodeMonkey.KitchenCaosControl.KitchenCounters
 {
     public abstract class Counter : MonoBehaviour, IKitchenObjectParent
     {
+        public static event EventHandler OnAnyObjectPlacedOnCounter;
+
         [SerializeField] private Transform counterTopPoint;
 
         private KitchenObject _currentKitchenObject;
@@ -16,7 +19,13 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
 
         public Transform GetParentFollowPoint() => counterTopPoint;
 
-        public void SetKitchenObject(KitchenObject kitchenObject) => _currentKitchenObject = kitchenObject;
+        public void SetKitchenObject(KitchenObject kitchenObject)
+        {
+            _currentKitchenObject = kitchenObject;
+
+            if (kitchenObject)
+                OnAnyObjectPlacedOnCounter?.Invoke(this, EventArgs.Empty);
+        }
 
         public KitchenObject GetKitchenObject() => _currentKitchenObject;
 

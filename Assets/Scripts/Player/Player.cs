@@ -12,6 +12,8 @@ namespace CodeMonkey.KitchenCaosControl
         /// </summary>
         public static Player Instance { get; private set; }
 
+        public event EventHandler OnPickupSomething;
+
         public event EventHandler<OnSelectedCounterUpdatedEventArgs> OnSelectedCounterUpdated;
         public class OnSelectedCounterUpdatedEventArgs : EventArgs
         {
@@ -155,7 +157,13 @@ namespace CodeMonkey.KitchenCaosControl
 
         public Transform GetParentFollowPoint() => kitchenObjectHoldPoint;
 
-        public void SetKitchenObject(KitchenObject kitchenObject) => _currentKitchenObject = kitchenObject;
+        public void SetKitchenObject(KitchenObject kitchenObject)
+        {
+            _currentKitchenObject = kitchenObject;
+
+            if (kitchenObject)
+                OnPickupSomething?.Invoke(this, EventArgs.Empty);
+        }
 
         public KitchenObject GetKitchenObject() => _currentKitchenObject;
 

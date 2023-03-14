@@ -7,6 +7,8 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
 {
     public class CuttingCounter : Counter, IHasProgress
     {
+        public static event EventHandler OnAnyCut;
+
         public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
         public event EventHandler OnCut;
 
@@ -62,6 +64,7 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
             // At this point, this counter has a kitchen object, and it can be sliced
 
             OnCut?.Invoke(this, EventArgs.Empty);
+            OnAnyCut?.Invoke(this, EventArgs.Empty);
 
             // Check if the cutting progress is enough to slice the object
             var cuttingRecipe = GetRecipeWithInput(kitchenObject.Data);

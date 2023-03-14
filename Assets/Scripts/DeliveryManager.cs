@@ -9,7 +9,9 @@ namespace CodeMonkey.KitchenCaosControl
     public class DeliveryManager : MonoBehaviour
     {
         public event EventHandler OnRecipeSpawned;
-        public event EventHandler OnRecipeDelivered;
+        public event EventHandler OnRecipeCompleted;
+        public event EventHandler OnRecipeSuccess;
+        public event EventHandler OnRecipeFailed;
 
         public static DeliveryManager Instance { get; private set; }
 
@@ -57,10 +59,12 @@ namespace CodeMonkey.KitchenCaosControl
 
                 // Recipe delivered
                 WaitingRecipeList.RemoveAt(i);
-                break;
+                OnRecipeSuccess?.Invoke(this, EventArgs.Empty);
+                OnRecipeCompleted?.Invoke(this, EventArgs.Empty);
+                return;
             }
 
-            OnRecipeDelivered?.Invoke(this, EventArgs.Empty);
+            OnRecipeFailed?.Invoke(this, EventArgs.Empty);
         }
     }
 }

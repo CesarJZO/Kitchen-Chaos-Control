@@ -16,7 +16,7 @@ namespace CodeMonkey.KitchenCaosControl.UI
         private void Start()
         {
             DeliveryManager.Instance.OnRecipeSpawned += DeliveryManager_OnRecipeSpawned;
-            DeliveryManager.Instance.OnRecipeDelivered += DeliveryManager_OnRecipeDelivered;
+            DeliveryManager.Instance.OnRecipeCompleted += DeliveryManagerOnRecipeCompleted;
 
             UpdateVisual();
         }
@@ -26,7 +26,7 @@ namespace CodeMonkey.KitchenCaosControl.UI
             UpdateVisual();
         }
 
-        private void DeliveryManager_OnRecipeDelivered(object sender, EventArgs e)
+        private void DeliveryManagerOnRecipeCompleted(object sender, EventArgs e)
         {
             UpdateVisual();
         }
