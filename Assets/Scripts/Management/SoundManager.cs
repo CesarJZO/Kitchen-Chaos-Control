@@ -4,7 +4,7 @@ using CodeMonkey.KitchenCaosControl.KitchenCounters;
 using CodeMonkey.KitchenCaosControl.ScriptableObjects;
 using UnityEngine;
 
-namespace CodeMonkey.KitchenCaosControl
+namespace CodeMonkey.KitchenCaosControl.Management
 {
     public class SoundManager : MonoBehaviour
     {

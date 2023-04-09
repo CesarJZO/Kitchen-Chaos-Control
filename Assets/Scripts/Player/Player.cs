@@ -1,6 +1,7 @@
 ﻿using System;
 using CodeMonkey.KitchenCaosControl.Input;
 using CodeMonkey.KitchenCaosControl.KitchenCounters;
+using CodeMonkey.KitchenCaosControl.Management;
 using UnityEngine;
 
 namespace CodeMonkey.KitchenCaosControl
@@ -14,8 +15,8 @@ namespace CodeMonkey.KitchenCaosControl
 
         public event EventHandler OnPickupSomething;
 
-        public event EventHandler<OnSelectedCounterUpdatedEventArgs> OnSelectedCounterUpdated;
-        public class OnSelectedCounterUpdatedEventArgs : EventArgs
+        public event EventHandler<SelectedCounterUpdatedEventArgs> OnSelectedCounterUpdated;
+        public class SelectedCounterUpdatedEventArgs : EventArgs
         {
             public Counter selectedCounter;
         }
@@ -58,12 +59,14 @@ namespace CodeMonkey.KitchenCaosControl
 
         private void GameInputOnInteractAlternateAction(object sender, EventArgs e)
         {
+            if (!GameManager.Instance.IsGamePlaying) return;
             if (_selectedCounter)
                 _selectedCounter.InteractAlternate(this);
         }
 
         private void GameInputOnInteractAction(object sender, EventArgs e)
         {
+            if (!GameManager.Instance.IsGamePlaying) return;
             if (_selectedCounter)
                 _selectedCounter.Interact(this);
         }
@@ -99,7 +102,7 @@ namespace CodeMonkey.KitchenCaosControl
             void SetSelectedCounter(Counter counter)
             {
                 _selectedCounter = counter;
-                OnSelectedCounterUpdated?.Invoke(this, new OnSelectedCounterUpdatedEventArgs
+                OnSelectedCounterUpdated?.Invoke(this, new SelectedCounterUpdatedEventArgs
                 {
                     selectedCounter = _selectedCounter
                 });

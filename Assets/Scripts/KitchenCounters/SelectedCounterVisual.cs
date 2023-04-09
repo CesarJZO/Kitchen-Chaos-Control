@@ -12,7 +12,7 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
             Player.Instance.OnSelectedCounterUpdated += PlayerOnSelectedCounterUpdated;
         }
 
-        private void PlayerOnSelectedCounterUpdated(object sender, Player.OnSelectedCounterUpdatedEventArgs e)
+        private void PlayerOnSelectedCounterUpdated(object sender, Player.SelectedCounterUpdatedEventArgs e)
         {
             foreach (var visualGameObject in visualGameObjects)
                 visualGameObject.SetActive(e.selectedCounter == counter);
