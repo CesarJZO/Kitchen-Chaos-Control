@@ -17,10 +17,13 @@ namespace CodeMonkey.KitchenCaosControl
 
         [SerializeField] private float spawnRecipeTime;
         [SerializeField] private int maxWaitingRecipes;
+        private int _recipesDelivered;
 
         [Tooltip("Reference to the only instance of the RecipeList scriptable object. Useful if multiple objects need to access the same list of recipes.")]
         [SerializeField] private RecipeList recipeList;
         public List<Recipe> WaitingRecipeList { get; private set; }
+
+        public int RecipesDelivered => _recipesDelivered;
 
         private void Awake()
         {
@@ -58,6 +61,7 @@ namespace CodeMonkey.KitchenCaosControl
                 if (!plateContentsMatchesRecipe) continue;
 
                 // Recipe delivered
+                _recipesDelivered = RecipesDelivered + 1;
                 WaitingRecipeList.RemoveAt(i);
                 OnRecipeSuccess?.Invoke(this, EventArgs.Empty);
                 OnRecipeCompleted?.Invoke(this, EventArgs.Empty);

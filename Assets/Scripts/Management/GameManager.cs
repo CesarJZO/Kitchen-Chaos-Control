@@ -18,14 +18,21 @@ namespace CodeMonkey.KitchenCaosControl.Management
         }
 
         private State _state;
-        private float _waitingToStartTimer = 1f;
-        private float _countdownToStartTimer = 3f;
-        private float _gamePlayingTimer = 10f;
+        [SerializeField] private float waitToStartTime;
+        private float _waitingToStartTimer;
+        [SerializeField] private float countdownToStartTime;
+        private float _countdownToStartTimer;
+        [SerializeField] private float gamePlayTime;
+        private float _gamePlayingTimer;
 
         public bool IsGamePlaying => _state == State.GamePlaying;
         public bool IsCountdownToStartActive => _state == State.CountdownToStart;
+        public bool IsGameOver => _state == State.GameOver;
 
         public float CountdownToStartTimer => _countdownToStartTimer;
+
+        // Since the timer is counting down, we need to invert the value
+        public float GamePlayingTimerNormalized => 1 - (_gamePlayingTimer / gamePlayTime);
 
         private void Awake()
         {
@@ -34,6 +41,10 @@ namespace CodeMonkey.KitchenCaosControl.Management
             else
                 Instance = this;
             _state = State.WaitingToStart;
+
+            _waitingToStartTimer = waitToStartTime;
+            _countdownToStartTimer = countdownToStartTime;
+            _gamePlayingTimer = gamePlayTime;
         }
 
         private void Update()
