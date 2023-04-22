@@ -12,6 +12,8 @@ namespace CodeMonkey.KitchenCaosControl.Management
 
         [SerializeField] private AudioClipRefs audioClipRefs;
 
+        private float _volume = 1f;
+
         private void Awake()
         {
             Instance = this;
@@ -62,19 +64,32 @@ namespace CodeMonkey.KitchenCaosControl.Management
             PlaySound(audioClipRefs.trash, trashCounter!.transform.position);
         }
 
-        private static void PlaySound(AudioClip audioClip, Vector3 position, float volume = 1f)
-        {
-            AudioSource.PlayClipAtPoint(audioClip, position, volume);
-        }
-
-        private static void PlaySound(IReadOnlyList<AudioClip> audioClips, Vector3 position, float volume = 1f)
-        {
-            PlaySound(audioClips[UnityEngine.Random.Range(0, audioClips.Count)], position, volume);
-        }
-
         public void PlayFootstepsSound(Vector3 position, float volume)
         {
             PlaySound(audioClipRefs.footstep, position, volume);
+        }
+
+        private void PlaySound(AudioClip audioClip, Vector3 position, float volumeMultiplayer = 1f)
+        {
+            AudioSource.PlayClipAtPoint(audioClip, position, volumeMultiplayer * _volume);
+        }
+
+        private void PlaySound(IReadOnlyList<AudioClip> audioClips, Vector3 position, float volumeMultiplayer = 1f)
+        {
+            PlaySound(audioClips[UnityEngine.Random.Range(0, audioClips.Count)], position, volumeMultiplayer * _volume);
+        }
+
+        public void ChangeVolume()
+        {
+            _volume += 0.1f;
+
+            if (_volume > 1f)
+                _volume = 0f;
+        }
+
+        public float GetVolume()
+        {
+            return _volume;
         }
     }
 }
