@@ -6,16 +6,33 @@ namespace CodeMonkey.KitchenCaosControl.Input
 {
     public class GameInput : MonoBehaviour
     {
+        public static GameInput Instance { get; private set; }
+
         public event EventHandler OnInteractAction;
         public event EventHandler OnInteractAlternateAction;
+        public event EventHandler OnPauseAction;
+
         private PlayerInputActions _inputActions;
 
         private void Awake()
         {
+            Instance = this;
+
             _inputActions = new PlayerInputActions();
             _inputActions.Player.Enable();
             _inputActions.Player.Interact.performed += OnInteractPerformed;
             _inputActions.Player.InteractAlternate.performed += OnInteractAlternatePerformed;
+            _inputActions.Player.Pause.performed += OnPausePerformed;
+        }
+
+        private void OnDestroy()
+        {
+            _inputActions.Player.Disable();
+            _inputActions.Player.Interact.performed -= OnInteractPerformed;
+            _inputActions.Player.InteractAlternate.performed -= OnInteractAlternatePerformed;
+            _inputActions.Player.Pause.performed -= OnPausePerformed;
+
+            _inputActions.Dispose();
         }
 
         private void OnInteractAlternatePerformed(InputAction.CallbackContext obj)
@@ -26,6 +43,11 @@ namespace CodeMonkey.KitchenCaosControl.Input
         private void OnInteractPerformed(InputAction.CallbackContext obj)
         {
             OnInteractAction?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void OnPausePerformed(InputAction.CallbackContext obj)
+        {
+            OnPauseAction?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>

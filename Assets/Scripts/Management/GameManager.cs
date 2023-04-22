@@ -1,4 +1,5 @@
 ﻿using System;
+using CodeMonkey.KitchenCaosControl.Input;
 using UnityEngine;
 
 namespace CodeMonkey.KitchenCaosControl.Management
@@ -8,22 +9,20 @@ namespace CodeMonkey.KitchenCaosControl.Management
         public static GameManager Instance { get; private set; }
 
         public event EventHandler OnStateChanged;
+        public event EventHandler OnGamePaused;
+        public event EventHandler OnGameUnpaused;
 
-        private enum State
-        {
-            WaitingToStart,
-            CountdownToStart,
-            GamePlaying,
-            GameOver
-        }
+        [SerializeField] private float waitToStartTime;
+        [SerializeField] private float countdownToStartTime;
+        [SerializeField] private float gamePlayTime;
 
         private State _state;
-        [SerializeField] private float waitToStartTime;
+
         private float _waitingToStartTimer;
-        [SerializeField] private float countdownToStartTime;
         private float _countdownToStartTimer;
-        [SerializeField] private float gamePlayTime;
         private float _gamePlayingTimer;
+
+        private bool _isGamePaused;
 
         public bool IsGamePlaying => _state == State.GamePlaying;
         public bool IsCountdownToStartActive => _state == State.CountdownToStart;
@@ -45,6 +44,16 @@ namespace CodeMonkey.KitchenCaosControl.Management
             _waitingToStartTimer = waitToStartTime;
             _countdownToStartTimer = countdownToStartTime;
             _gamePlayingTimer = gamePlayTime;
+        }
+
+        private void Start()
+        {
+            GameInput.Instance.OnPauseAction += GameInputOnPauseAction;
+        }
+
+        private void GameInputOnPauseAction(object sender, EventArgs e)
+        {
+            TogglePauseGame();
         }
 
         private void Update()
@@ -74,6 +83,26 @@ namespace CodeMonkey.KitchenCaosControl.Management
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        public void TogglePauseGame()
+        {
+            _isGamePaused = !_isGamePaused;
+
+            Time.timeScale = _isGamePaused ? 0f : 1f;
+
+            if (_isGamePaused)
+                OnGamePaused?.Invoke(this, EventArgs.Empty);
+            else
+                OnGameUnpaused?.Invoke(this, EventArgs.Empty);
+        }
+
+        private enum State
+        {
+            WaitingToStart,
+            CountdownToStart,
+            GamePlaying,
+            GameOver
         }
     }
 }

@@ -7,6 +7,11 @@ namespace CodeMonkey.KitchenCaosControl.KitchenCounters
     {
         public static event EventHandler OnAnyObjectPlacedOnCounter;
 
+        public static void ResetStaticData()
+        {
+            OnAnyObjectPlacedOnCounter = null;
+        }
+
         [SerializeField] private Transform counterTopPoint;
 
         private KitchenObject _currentKitchenObject;

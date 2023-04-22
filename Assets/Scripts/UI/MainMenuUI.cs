@@ -13,6 +13,8 @@ namespace CodeMonkey.KitchenCaosControl.UI
         {
             playButton.onClick.AddListener(() => Loader.Load(Loader.Scene.GameScene));
             quitButton.onClick.AddListener(Application.Quit);
+
+            Time.timeScale = 1f;
         }
     }
 }
