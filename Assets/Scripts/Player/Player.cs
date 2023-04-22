@@ -111,13 +111,13 @@ namespace CodeMonkey.KitchenChaosControl
 
         private void HandleMovement()
         {
-            var moveDirection = gameInput.GetMovementDirection();
+            Vector3 moveDirection = gameInput.GetMovementDirection();
             SpeedMultiplier = moveDirection.magnitude;
-            var t = transform;
-            var position = t.position;
+            Transform t = transform;
+            Vector3 position = t.position;
 
-            var moveDistance = moveSpeed * Time.deltaTime;
-            var canMove = !CapsuleCast(moveDirection);
+            float moveDistance = moveSpeed * Time.deltaTime;
+            bool canMove = !CapsuleCast(moveDirection);
 
             if (!canMove)
             {
@@ -125,7 +125,7 @@ namespace CodeMonkey.KitchenChaosControl
 
                 // Attempt only x movement
                 var moveDirectionX = new Vector3(moveDirection.x, 0f, 0f);
-                var perpendicularDeadZone = 0.5f;
+                const float perpendicularDeadZone = 0.5f;
                 canMove = Mathf.Abs(moveDirection.x) > perpendicularDeadZone && !CapsuleCast(moveDirectionX);
 
                 if (canMove)
@@ -149,7 +149,7 @@ namespace CodeMonkey.KitchenChaosControl
             if (canMove)
                 t.position += moveDirection * moveDistance;
 
-            var forward = Vector3.Slerp(t.forward, moveDirection, Time.deltaTime * rotationSpeed);
+            Vector3 forward = Vector3.Slerp(t.forward, moveDirection, Time.deltaTime * rotationSpeed);
             if (forward != Vector3.zero) t.forward = forward;
 
             bool CapsuleCast(Vector3 direction)
