@@ -9,12 +9,11 @@ namespace CodeMonkey.KitchenCaosControl.Management
 
         private void Update()
         {
-            if (_isFirstUpdate)
-            {
-                _isFirstUpdate = false;
+            if (!_isFirstUpdate) return;
 
-                Loader.LoaderCallback();
-            }
+            _isFirstUpdate = false;
+
+            Loader.LoaderCallback();
         }
     }
 }
