@@ -68,28 +68,6 @@ namespace CodeMonkey.KitchenChaosControl.Input
             ],
             ""bindings"": [
                 {
-                    ""name"": """",
-                    ""id"": ""bb5e0d40-915e-4d7d-a5e9-598110eb56d5"",
-                    ""path"": ""<Gamepad>/dpad"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""887bcb38-6ff3-4863-9449-2879f65e2d2b"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": ""WASD"",
                     ""id"": ""1a7e3df9-73f9-470b-a8a4-ba43651a8722"",
                     ""path"": ""2DVector"",
@@ -190,6 +168,28 @@ namespace CodeMonkey.KitchenChaosControl.Input
                 },
                 {
                     ""name"": """",
+                    ""id"": ""bb5e0d40-915e-4d7d-a5e9-598110eb56d5"",
+                    ""path"": ""<Gamepad>/dpad"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""887bcb38-6ff3-4863-9449-2879f65e2d2b"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""74190fcc-32bb-4546-a87e-79137ca8ae11"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
@@ -267,8 +267,8 @@ namespace CodeMonkey.KitchenChaosControl.Input
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e5e82980-34aa-42a9-9ab0-f033984d6e97"",
-                    ""path"": ""<Gamepad>/start"",
+                    ""id"": ""29c67bd8-0f1c-4a32-bd09-d497cf29bf1f"",
+                    ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -278,8 +278,8 @@ namespace CodeMonkey.KitchenChaosControl.Input
                 },
                 {
                     ""name"": """",
-                    ""id"": ""29c67bd8-0f1c-4a32-bd09-d497cf29bf1f"",
-                    ""path"": ""<Keyboard>/escape"",
+                    ""id"": ""e5e82980-34aa-42a9-9ab0-f033984d6e97"",
+                    ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
