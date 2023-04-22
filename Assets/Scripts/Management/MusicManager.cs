@@ -6,6 +6,8 @@ namespace CodeMonkey.KitchenCaosControl.Management
     [RequireComponent(typeof(AudioSource))]
     public class MusicManager : MonoBehaviour
     {
+        private const string PlayerPrefsMusicVolume = "MusicVolume";
+
         public static MusicManager Instance { get; private set; }
 
         private AudioSource _audioSource;
@@ -17,6 +19,10 @@ namespace CodeMonkey.KitchenCaosControl.Management
             Instance = this;
 
             _audioSource = GetComponent<AudioSource>();
+
+            _volume = PlayerPrefs.GetFloat(PlayerPrefsMusicVolume, 0.3f);
+
+            _audioSource.volume = _volume;
         }
 
         public void ChangeVolume()
@@ -27,6 +33,9 @@ namespace CodeMonkey.KitchenCaosControl.Management
                 _volume = 0f;
 
             _audioSource.volume = _volume;
+
+            PlayerPrefs.SetFloat(PlayerPrefsMusicVolume, _volume);
+            PlayerPrefs.Save();
         }
 
         public float GetVolume()

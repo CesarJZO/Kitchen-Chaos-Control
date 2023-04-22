@@ -8,6 +8,8 @@ namespace CodeMonkey.KitchenCaosControl.Management
 {
     public class SoundManager : MonoBehaviour
     {
+        private const string PlayerPrefsSoundEffectsVolume = "SoundEffectsVolume";
+
         public static SoundManager Instance { get; private set; }
 
         [SerializeField] private AudioClipRefs audioClipRefs;
@@ -17,6 +19,8 @@ namespace CodeMonkey.KitchenCaosControl.Management
         private void Awake()
         {
             Instance = this;
+
+            _volume = PlayerPrefs.GetFloat(PlayerPrefsSoundEffectsVolume, 1f);
         }
 
         private void Start()
@@ -85,6 +89,9 @@ namespace CodeMonkey.KitchenCaosControl.Management
 
             if (_volume > 1f)
                 _volume = 0f;
+
+            PlayerPrefs.SetFloat(PlayerPrefsSoundEffectsVolume, _volume);
+            PlayerPrefs.Save();
         }
 
         public float GetVolume()
