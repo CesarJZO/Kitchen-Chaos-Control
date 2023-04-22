@@ -21,26 +21,32 @@ namespace CodeMonkey.KitchenChaosControl.UI
         [Header("Key Rebinding")]
         [SerializeField] private GameObject pressToRebindKey;
         [Space]
-        [SerializeField] private TextMeshProUGUI moveUpText;
         [SerializeField] private Button moveUpButton;
+        [SerializeField] private TextMeshProUGUI moveUpText;
         [Space]
-        [SerializeField] private TextMeshProUGUI moveDownText;
         [SerializeField] private Button moveDownButton;
+        [SerializeField] private TextMeshProUGUI moveDownText;
         [Space]
-        [SerializeField] private TextMeshProUGUI moveLeftText;
         [SerializeField] private Button moveLeftButton;
+        [SerializeField] private TextMeshProUGUI moveLeftText;
         [Space]
-        [SerializeField] private TextMeshProUGUI moveRightText;
         [SerializeField] private Button moveRightButton;
+        [SerializeField] private TextMeshProUGUI moveRightText;
         [Space]
-        [SerializeField] private TextMeshProUGUI interactText;
         [SerializeField] private Button interactButton;
+        [SerializeField] private TextMeshProUGUI interactText;
+        [SerializeField] private Button gamepadInteractButton;
+        [SerializeField] private TextMeshProUGUI gamepadInteractText;
         [Space]
-        [SerializeField] private TextMeshProUGUI interactAlt;
         [SerializeField] private Button interactAltButton;
+        [SerializeField] private TextMeshProUGUI interactAlt;
+        [SerializeField] private Button gamepadInteractAltButton;
+        [SerializeField] private TextMeshProUGUI gamepadInteractAltText;
         [Space]
-        [SerializeField] private TextMeshProUGUI pauseText;
         [SerializeField] private Button pauseButton;
+        [SerializeField] private TextMeshProUGUI pauseText;
+        [SerializeField] private Button gamepadPauseButton;
+        [SerializeField] private TextMeshProUGUI gamepadPauseText;
         [Space]
 
         [SerializeField] private Button closeButton;
@@ -72,6 +78,9 @@ namespace CodeMonkey.KitchenChaosControl.UI
             interactButton.onClick.AddListener(() => RebindBinding(GameInput.Binding.Interact));
             interactAltButton.onClick.AddListener(() => RebindBinding(GameInput.Binding.InteractAlternate));
             pauseButton.onClick.AddListener(() => RebindBinding(GameInput.Binding.Pause));
+            gamepadInteractButton.onClick.AddListener(() => RebindBinding(GameInput.Binding.GamepadInteract));
+            gamepadInteractAltButton.onClick.AddListener(() => RebindBinding(GameInput.Binding.GamepadInteractAlternate));
+            gamepadPauseButton.onClick.AddListener(() => RebindBinding(GameInput.Binding.GamepadPause));
         }
 
         private void Start()
@@ -101,9 +110,17 @@ namespace CodeMonkey.KitchenChaosControl.UI
             interactText.text = GameInput.Instance.GetBindingName(GameInput.Binding.Interact);
             interactAlt.text = GameInput.Instance.GetBindingName(GameInput.Binding.InteractAlternate);
             pauseText.text = GameInput.Instance.GetBindingName(GameInput.Binding.Pause);
+            gamepadInteractText.text = GameInput.Instance.GetBindingName(GameInput.Binding.GamepadInteract);
+            gamepadInteractAltText.text = GameInput.Instance.GetBindingName(GameInput.Binding.GamepadInteractAlternate);
+            gamepadPauseText.text = GameInput.Instance.GetBindingName(GameInput.Binding.GamepadPause);
         }
 
-        public void Show() => gameObject.SetActive(true);
+        public void Show()
+        {
+            gameObject.SetActive(true);
+
+            musicButton.Select();
+        }
 
         public void Hide() => gameObject.SetActive(false);
 

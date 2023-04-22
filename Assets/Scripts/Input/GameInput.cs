@@ -68,27 +68,22 @@ namespace CodeMonkey.KitchenChaosControl.Input
             return Vector3.ClampMagnitude(xzDirection, maxMagnitude);
         }
 
-        public string GetBindingName(Binding binding)
+        public string GetBindingName(Binding binding) => binding switch
         {
-            switch (binding)
-            {
-                default:
-                case Binding.MoveUp:
-                    return _inputActions.Player.Move.bindings[1].ToDisplayString();
-                case Binding.MoveDown:
-                    return _inputActions.Player.Move.bindings[3].ToDisplayString();
-                case Binding.MoveLeft:
-                    return _inputActions.Player.Move.bindings[5].ToDisplayString();
-                case Binding.MoveRight:
-                    return _inputActions.Player.Move.bindings[7].ToDisplayString();
-                case Binding.Interact:
-                    return _inputActions.Player.Interact.bindings[0].ToDisplayString();
-                case Binding.InteractAlternate:
-                    return _inputActions.Player.InteractAlternate.bindings[0].ToDisplayString();
-                case Binding.Pause:
-                    return _inputActions.Player.Pause.bindings[0].ToDisplayString();
-            }
-        }
+            Binding.MoveUp => _inputActions.Player.Move.bindings[1].ToDisplayString(),
+            Binding.MoveDown => _inputActions.Player.Move.bindings[3].ToDisplayString(),
+            Binding.MoveLeft => _inputActions.Player.Move.bindings[5].ToDisplayString(),
+            Binding.MoveRight => _inputActions.Player.Move.bindings[7].ToDisplayString(),
+
+            Binding.Interact => _inputActions.Player.Interact.bindings[0].ToDisplayString(),
+            Binding.InteractAlternate => _inputActions.Player.InteractAlternate.bindings[0].ToDisplayString(),
+            Binding.Pause => _inputActions.Player.Pause.bindings[0].ToDisplayString(),
+
+            Binding.GamepadInteract => _inputActions.Player.Interact.bindings[1].ToDisplayString(),
+            Binding.GamepadInteractAlternate => _inputActions.Player.InteractAlternate.bindings[1].ToDisplayString(),
+            Binding.GamepadPause => _inputActions.Player.Pause.bindings[1].ToDisplayString(),
+            _ => _inputActions.Player.Move.bindings[1].ToDisplayString()
+        };
 
         public void RebindBinding(Binding binding, Action onActionRebound)
         {
@@ -100,9 +95,14 @@ namespace CodeMonkey.KitchenChaosControl.Input
                 Binding.MoveDown => (_inputActions.Player.Move, 3),
                 Binding.MoveLeft => (_inputActions.Player.Move, 5),
                 Binding.MoveRight => (_inputActions.Player.Move, 7),
+
                 Binding.Interact => (_inputActions.Player.Interact, 0),
                 Binding.InteractAlternate => (_inputActions.Player.InteractAlternate, 0),
                 Binding.Pause => (_inputActions.Player.Pause, 0),
+
+                Binding.GamepadInteract => (_inputActions.Player.Interact, 1),
+                Binding.GamepadInteractAlternate => (_inputActions.Player.InteractAlternate, 1),
+                Binding.GamepadPause => (_inputActions.Player.Pause, 1),
                 _ => throw new ArgumentOutOfRangeException(nameof(binding), binding, null)
             };
 
@@ -128,7 +128,10 @@ namespace CodeMonkey.KitchenChaosControl.Input
             MoveRight,
             Interact,
             InteractAlternate,
-            Pause
+            Pause,
+            GamepadInteract,
+            GamepadInteractAlternate,
+            GamepadPause
         }
     }
 }

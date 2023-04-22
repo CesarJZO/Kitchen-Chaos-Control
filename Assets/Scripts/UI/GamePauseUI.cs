@@ -44,7 +44,11 @@ namespace CodeMonkey.KitchenChaosControl.UI
             Hide();
         }
 
-        public void Show() => gameObject.SetActive(true);
+        public void Show()
+        {
+            gameObject.SetActive(true);
+            resumeButton.Select();
+        }
 
         public void Hide() => gameObject.SetActive(false);
     }
