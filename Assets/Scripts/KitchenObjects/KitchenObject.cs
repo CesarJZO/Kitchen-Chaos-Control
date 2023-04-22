@@ -1,7 +1,7 @@
-﻿using CodeMonkey.KitchenCaosControl.ScriptableObjects;
+﻿using CodeMonkey.KitchenChaosControl.ScriptableObjects;
 using UnityEngine;
 
-namespace CodeMonkey.KitchenCaosControl
+namespace CodeMonkey.KitchenChaosControl
 {
     public class KitchenObject : MonoBehaviour
     {

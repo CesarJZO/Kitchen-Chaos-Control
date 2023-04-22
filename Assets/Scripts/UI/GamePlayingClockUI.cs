@@ -1,8 +1,8 @@
-﻿using CodeMonkey.KitchenCaosControl.Management;
+﻿using CodeMonkey.KitchenChaosControl.Management;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CodeMonkey.KitchenCaosControl.UI
+namespace CodeMonkey.KitchenChaosControl.UI
 {
     public class GamePlayingClockUI : MonoBehaviour
     {

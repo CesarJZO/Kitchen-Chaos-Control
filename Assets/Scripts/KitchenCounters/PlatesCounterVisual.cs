@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CodeMonkey.KitchenCaosControl.KitchenCounters
+namespace CodeMonkey.KitchenChaosControl.KitchenCounters
 {
     public class PlatesCounterVisual : MonoBehaviour
     {

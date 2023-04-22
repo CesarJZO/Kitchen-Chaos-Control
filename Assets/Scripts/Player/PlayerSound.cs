@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using CodeMonkey.KitchenCaosControl.Management;
+using CodeMonkey.KitchenChaosControl.Management;
 
-namespace CodeMonkey.KitchenCaosControl
+namespace CodeMonkey.KitchenChaosControl
 {
     [RequireComponent(typeof(Player))]
     public class PlayerSound : MonoBehaviour

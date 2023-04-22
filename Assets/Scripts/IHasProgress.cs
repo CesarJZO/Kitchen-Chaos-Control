@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CodeMonkey.KitchenCaosControl
+namespace CodeMonkey.KitchenChaosControl
 {
     public interface IHasProgress
     {

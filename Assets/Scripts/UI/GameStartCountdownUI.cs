@@ -1,9 +1,9 @@
 ﻿using System;
-using CodeMonkey.KitchenCaosControl.Management;
+using CodeMonkey.KitchenChaosControl.Management;
 using TMPro;
 using UnityEngine;
 
-namespace CodeMonkey.KitchenCaosControl.UI
+namespace CodeMonkey.KitchenChaosControl.UI
 {
     public class GameStartCountdownUI : MonoBehaviour
     {

@@ -1,10 +1,10 @@
 ﻿using System;
-using CodeMonkey.KitchenCaosControl.ScriptableObjects;
+using CodeMonkey.KitchenChaosControl.ScriptableObjects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CodeMonkey.KitchenCaosControl.UI
+namespace CodeMonkey.KitchenChaosControl.UI
 {
     /// <summary>
     /// Single refers to a single recipe

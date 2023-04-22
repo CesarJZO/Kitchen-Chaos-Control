@@ -1,4 +1,4 @@
-﻿namespace CodeMonkey.KitchenCaosControl.KitchenCounters
+﻿namespace CodeMonkey.KitchenChaosControl.KitchenCounters
 {
     public class DeliveryCounter : Counter
     {

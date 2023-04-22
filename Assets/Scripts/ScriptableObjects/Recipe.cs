@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace CodeMonkey.KitchenCaosControl.ScriptableObjects
+namespace CodeMonkey.KitchenChaosControl.ScriptableObjects
 {
     [CreateAssetMenu]
     public class Recipe : ScriptableObject

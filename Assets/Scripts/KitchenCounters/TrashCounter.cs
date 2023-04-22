@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CodeMonkey.KitchenCaosControl.KitchenCounters
+namespace CodeMonkey.KitchenChaosControl.KitchenCounters
 {
     public class TrashCounter : Counter
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace CodeMonkey.KitchenCaosControl.KitchenCounters
+namespace CodeMonkey.KitchenChaosControl.KitchenCounters
 {
     public abstract class Counter : MonoBehaviour, IKitchenObjectParent
     {

@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace CodeMonkey.KitchenCaosControl.Management
+namespace CodeMonkey.KitchenChaosControl.Management
 {
     [RequireComponent(typeof(AudioSource))]
     public class MusicManager : MonoBehaviour

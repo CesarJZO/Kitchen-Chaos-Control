@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace CodeMonkey.KitchenCaosControl
+namespace CodeMonkey.KitchenChaosControl
 {
     public class LookAtCamera : MonoBehaviour
     {

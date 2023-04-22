@@ -1,10 +1,10 @@
 ﻿using System;
-using CodeMonkey.KitchenCaosControl.Input;
-using CodeMonkey.KitchenCaosControl.KitchenCounters;
-using CodeMonkey.KitchenCaosControl.Management;
+using CodeMonkey.KitchenChaosControl.Input;
+using CodeMonkey.KitchenChaosControl.KitchenCounters;
+using CodeMonkey.KitchenChaosControl.Management;
 using UnityEngine;
 
-namespace CodeMonkey.KitchenCaosControl
+namespace CodeMonkey.KitchenChaosControl
 {
     public class Player : MonoBehaviour, IKitchenObjectParent
     {

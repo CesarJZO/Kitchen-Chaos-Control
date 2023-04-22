@@ -1,7 +1,7 @@
-﻿using CodeMonkey.KitchenCaosControl.KitchenCounters;
+﻿using CodeMonkey.KitchenChaosControl.KitchenCounters;
 using UnityEngine;
 
-namespace CodeMonkey.KitchenCaosControl.Management
+namespace CodeMonkey.KitchenChaosControl.Management
 {
     public class ResetStaticDataManager : MonoBehaviour
     {

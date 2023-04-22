@@ -1,6 +1,6 @@
 ﻿using UnityEngine.SceneManagement;
 
-namespace CodeMonkey.KitchenCaosControl.Management
+namespace CodeMonkey.KitchenChaosControl.Management
 {
     public static class Loader
     {

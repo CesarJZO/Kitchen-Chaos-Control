@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace CodeMonkey.KitchenCaosControl.Input
+namespace CodeMonkey.KitchenChaosControl.Input
 {
     public class GameInput : MonoBehaviour
     {

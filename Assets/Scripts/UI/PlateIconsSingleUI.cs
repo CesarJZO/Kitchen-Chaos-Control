@@ -1,8 +1,8 @@
-﻿using CodeMonkey.KitchenCaosControl.ScriptableObjects;
+﻿using CodeMonkey.KitchenChaosControl.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CodeMonkey.KitchenCaosControl.UI
+namespace CodeMonkey.KitchenChaosControl.UI
 {
     public class PlateIconsSingleUI : MonoBehaviour
     {

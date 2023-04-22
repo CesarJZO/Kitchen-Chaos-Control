@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace CodeMonkey.KitchenCaosControl.UI
+namespace CodeMonkey.KitchenChaosControl.UI
 {
     public class ProgressBarUI : MonoBehaviour
     {

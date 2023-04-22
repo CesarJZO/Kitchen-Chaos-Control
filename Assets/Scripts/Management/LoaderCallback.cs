@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CodeMonkey.KitchenCaosControl.Management
+namespace CodeMonkey.KitchenChaosControl.Management
 {
     public class LoaderCallback : MonoBehaviour
     {

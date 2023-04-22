@@ -1,8 +1,8 @@
 ﻿using System;
-using CodeMonkey.KitchenCaosControl.ScriptableObjects;
+using CodeMonkey.KitchenChaosControl.ScriptableObjects;
 using UnityEngine;
 
-namespace CodeMonkey.KitchenCaosControl.KitchenCounters
+namespace CodeMonkey.KitchenChaosControl.KitchenCounters
 {
     public class ContainerCounter : Counter
     {

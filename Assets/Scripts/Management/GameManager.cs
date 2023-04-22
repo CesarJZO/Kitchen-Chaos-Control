@@ -1,8 +1,8 @@
 ﻿using System;
-using CodeMonkey.KitchenCaosControl.Input;
+using CodeMonkey.KitchenChaosControl.Input;
 using UnityEngine;
 
-namespace CodeMonkey.KitchenCaosControl.Management
+namespace CodeMonkey.KitchenChaosControl.Management
 {
     public class GameManager : MonoBehaviour
     {

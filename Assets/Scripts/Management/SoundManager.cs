@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using CodeMonkey.KitchenCaosControl.KitchenCounters;
-using CodeMonkey.KitchenCaosControl.ScriptableObjects;
+using CodeMonkey.KitchenChaosControl.KitchenCounters;
+using CodeMonkey.KitchenChaosControl.ScriptableObjects;
 using UnityEngine;
 
-namespace CodeMonkey.KitchenCaosControl.Management
+namespace CodeMonkey.KitchenChaosControl.Management
 {
     public class SoundManager : MonoBehaviour
     {
