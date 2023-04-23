@@ -12,13 +12,11 @@ namespace CodeMonkey.KitchenChaosControl.Management
         public event EventHandler OnGamePaused;
         public event EventHandler OnGameUnpaused;
 
-        [SerializeField] private float waitToStartTime;
         [SerializeField] private float countdownToStartTime;
         [SerializeField] private float gamePlayTime;
 
         private State _state;
 
-        private float _waitingToStartTimer;
         private float _countdownToStartTimer;
         private float _gamePlayingTimer;
 
@@ -41,7 +39,6 @@ namespace CodeMonkey.KitchenChaosControl.Management
                 Instance = this;
             _state = State.WaitingToStart;
 
-            _waitingToStartTimer = waitToStartTime;
             _countdownToStartTimer = countdownToStartTime;
             _gamePlayingTimer = gamePlayTime;
         }
@@ -49,6 +46,15 @@ namespace CodeMonkey.KitchenChaosControl.Management
         private void Start()
         {
             GameInput.Instance.OnPauseAction += GameInputOnPauseAction;
+            GameInput.Instance.OnInteractAction += GameInputOnInteractAction;
+        }
+
+        private void GameInputOnInteractAction(object sender, EventArgs e)
+        {
+            if (_state is not State.WaitingToStart) return;
+
+            _state = State.CountdownToStart;
+            OnStateChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void GameInputOnPauseAction(object sender, EventArgs e)
@@ -61,10 +67,6 @@ namespace CodeMonkey.KitchenChaosControl.Management
             switch (_state)
             {
                 case State.WaitingToStart:
-                    _waitingToStartTimer -= Time.deltaTime;
-                    if (_waitingToStartTimer < 0f)
-                        _state = State.CountdownToStart;
-                    OnStateChanged?.Invoke(this, EventArgs.Empty);
                     break;
                 case State.CountdownToStart:
                     _countdownToStartTimer -= Time.deltaTime;

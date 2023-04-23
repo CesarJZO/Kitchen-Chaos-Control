@@ -1,4 +1,5 @@
 ﻿using System;
+using CodeMonkey.KitchenChaosControl.Management;
 using CodeMonkey.KitchenChaosControl.ScriptableObjects;
 using UnityEngine;
 
@@ -22,7 +23,7 @@ namespace CodeMonkey.KitchenChaosControl.KitchenCounters
             if (_spawnPlateTimer <= spawnTime) return;
 
             _spawnPlateTimer = 0f;
-            if (_platesSpawnAmount >= platesSpawnAmountMax) return;
+            if (!GameManager.Instance.IsGamePlaying || _platesSpawnAmount >= platesSpawnAmountMax) return;
 
             _platesSpawnAmount++;
             OnPlateSpawned?.Invoke(this, EventArgs.Empty);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CodeMonkey.KitchenChaosControl.Management;
 using CodeMonkey.KitchenChaosControl.ScriptableObjects;
 using UnityEngine;
 
@@ -38,8 +39,9 @@ namespace CodeMonkey.KitchenChaosControl
 
         private void SpawnRecipe()
         {
-            if (WaitingRecipeList.Count >= maxWaitingRecipes) return;
-            var waitingRecipe = recipeList.recipes[UnityEngine.Random.Range(0, recipeList.recipes.Count)];
+            if (!GameManager.Instance.IsGamePlaying || WaitingRecipeList.Count >= maxWaitingRecipes) return;
+
+            Recipe waitingRecipe = recipeList.recipes[UnityEngine.Random.Range(0, recipeList.recipes.Count)];
             WaitingRecipeList.Add(waitingRecipe);
 
             OnRecipeSpawned?.Invoke(this, EventArgs.Empty);

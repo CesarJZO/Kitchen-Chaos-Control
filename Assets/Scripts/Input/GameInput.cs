@@ -13,6 +13,7 @@ namespace CodeMonkey.KitchenChaosControl.Input
         public event EventHandler OnInteractAction;
         public event EventHandler OnInteractAlternateAction;
         public event EventHandler OnPauseAction;
+        public event EventHandler OnBindingRebind;
 
         private PlayerInputActions _inputActions;
 
@@ -116,6 +117,9 @@ namespace CodeMonkey.KitchenChaosControl.Input
                     string json = _inputActions.SaveBindingOverridesAsJson();
                     PlayerPrefs.SetString(PlayerPrefsBindings, json);
                     PlayerPrefs.Save();
+
+                    OnBindingRebind?.Invoke(this, EventArgs.Empty);
+                    Debug.Log(this);
                 })
                 .Start();
         }
