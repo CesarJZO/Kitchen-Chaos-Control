@@ -7,7 +7,17 @@ namespace CodeMonkey.KitchenChaosControl.UI
 {
     public class GameStartCountdownUI : MonoBehaviour
     {
+        private static readonly int Popup = Animator.StringToHash("CountdownUI_Popup");
+
         [SerializeField] private TextMeshProUGUI countdownText;
+
+        private Animator _animator;
+        private int _previousCountdownNumber;
+
+        private void Awake()
+        {
+            _animator = GetComponent<Animator>();
+        }
 
         private void Start()
         {
@@ -23,7 +33,14 @@ namespace CodeMonkey.KitchenChaosControl.UI
 
         private void Update()
         {
-            countdownText.text = Mathf.CeilToInt(GameManager.Instance.CountdownToStartTimer).ToString();
+            int countdownNumber = Mathf.CeilToInt(GameManager.Instance.CountdownToStartTimer);
+            countdownText.text = countdownNumber.ToString();
+
+            if (_previousCountdownNumber == countdownNumber) return;
+
+            _previousCountdownNumber = countdownNumber;
+            _animator.CrossFade(Popup, 0f);
+            SoundManager.Instance.PlayCountdownSound();
         }
     }
 }

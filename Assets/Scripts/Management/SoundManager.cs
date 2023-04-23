@@ -73,6 +73,11 @@ namespace CodeMonkey.KitchenChaosControl.Management
             PlaySound(audioClipRefs.footstep, position, volume);
         }
 
+        public void PlayCountdownSound()
+        {
+            PlaySound(audioClipRefs.warning, Vector3.zero);
+        }
+
         private void PlaySound(AudioClip audioClip, Vector3 position, float volumeMultiplayer = 1f)
         {
             AudioSource.PlayClipAtPoint(audioClip, position, volumeMultiplayer * _volume);
