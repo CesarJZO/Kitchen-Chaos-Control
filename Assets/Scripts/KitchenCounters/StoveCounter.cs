@@ -7,9 +7,9 @@ namespace CodeMonkey.KitchenChaosControl.KitchenCounters
 {
     public class StoveCounter : Counter, IHasProgress
     {
-        public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
-        public event EventHandler<OnStateChangedEventArgs> OnStateChanged;
-        public class OnStateChangedEventArgs : EventArgs
+        public event EventHandler<IHasProgress.ProgressChangedEventArgs> OnProgressChanged;
+        public event EventHandler<StateChangedEventArgs> OnStateChanged;
+        public class StateChangedEventArgs : EventArgs
         {
             public State state;
         }
@@ -21,6 +21,8 @@ namespace CodeMonkey.KitchenChaosControl.KitchenCounters
             Fried,
             Burned
         }
+
+        public bool IsFried => _state is State.Fried;
 
         [SerializeField] private FryingRecipe[] fryingRecipes;
         [SerializeField] private BurningRecipe[] burningRecipes;
@@ -45,7 +47,7 @@ namespace CodeMonkey.KitchenChaosControl.KitchenCounters
                 case State.Idle: break;
                 case State.Frying:
                     _fryingTimer += Time.deltaTime;
-                    OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+                    OnProgressChanged?.Invoke(this, new IHasProgress.ProgressChangedEventArgs
                     {
                         progressNormalized = _fryingTimer / _currentFryingRecipe.FryingMaxTime
                     });
@@ -59,11 +61,11 @@ namespace CodeMonkey.KitchenChaosControl.KitchenCounters
                     _currentBurningRecipe = GetBurningRecipeWithInput(GetKitchenObject().Data);
 
                     _state = State.Fried;
-                    OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = _state });
+                    OnStateChanged?.Invoke(this, new StateChangedEventArgs { state = _state });
                     break;
                 case State.Fried:
                     _burningTimer += Time.deltaTime;
-                    OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+                    OnProgressChanged?.Invoke(this, new IHasProgress.ProgressChangedEventArgs
                     {
                         progressNormalized = _burningTimer / _currentBurningRecipe.BurningMaxTime
                     });
@@ -74,8 +76,8 @@ namespace CodeMonkey.KitchenChaosControl.KitchenCounters
                     KitchenObject.SpawnKitchenObject(_currentBurningRecipe.Output, this);
                     _burningTimer = 0f;
                     _state = State.Burned;
-                    OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = _state });
-                    OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+                    OnStateChanged?.Invoke(this, new StateChangedEventArgs { state = _state });
+                    OnProgressChanged?.Invoke(this, new IHasProgress.ProgressChangedEventArgs
                     {
                         progressNormalized = 0f
                     });
@@ -95,8 +97,8 @@ namespace CodeMonkey.KitchenChaosControl.KitchenCounters
                     _currentFryingRecipe = GetFryingRecipeWithInput(GetKitchenObject().Data);
                     _state = State.Frying;
                     _fryingTimer = 0f;
-                    OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = _state });
-                    OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+                    OnStateChanged?.Invoke(this, new StateChangedEventArgs { state = _state });
+                    OnProgressChanged?.Invoke(this, new IHasProgress.ProgressChangedEventArgs
                     {
                         progressNormalized = _fryingTimer / _currentFryingRecipe.FryingMaxTime
                     });
@@ -112,8 +114,8 @@ namespace CodeMonkey.KitchenChaosControl.KitchenCounters
                         {
                             GetKitchenObject().DestroySelf();
                             _state = State.Idle;
-                            OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = _state });
-                            OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+                            OnStateChanged?.Invoke(this, new StateChangedEventArgs { state = _state });
+                            OnProgressChanged?.Invoke(this, new IHasProgress.ProgressChangedEventArgs
                             {
                                 progressNormalized = 0f
                             });
@@ -124,8 +126,8 @@ namespace CodeMonkey.KitchenChaosControl.KitchenCounters
                 {
                     GetKitchenObject().SetAndTeleportToParent(player);
                     _state = State.Idle;
-                    OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = _state });
-                    OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+                    OnStateChanged?.Invoke(this, new StateChangedEventArgs { state = _state });
+                    OnProgressChanged?.Invoke(this, new IHasProgress.ProgressChangedEventArgs
                     {
                         progressNormalized = 0f
                     });

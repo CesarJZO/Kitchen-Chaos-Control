@@ -21,7 +21,7 @@ namespace CodeMonkey.KitchenChaosControl.UI
             gameObject.SetActive(false);
         }
 
-        private void OnProgressChanged(object sender, IHasProgress.OnProgressChangedEventArgs e)
+        private void OnProgressChanged(object sender, IHasProgress.ProgressChangedEventArgs e)
         {
             barImage.fillAmount = e.progressNormalized;
             gameObject.SetActive(e.progressNormalized is > 0f and < 1f);

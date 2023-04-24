@@ -78,6 +78,11 @@ namespace CodeMonkey.KitchenChaosControl.Management
             PlaySound(audioClipRefs.warning, Vector3.zero);
         }
 
+        public void PlayWarningSound(Vector3 position)
+        {
+            PlaySound(audioClipRefs.warning, position);
+        }
+
         private void PlaySound(AudioClip audioClip, Vector3 position, float volumeMultiplayer = 1f)
         {
             AudioSource.PlayClipAtPoint(audioClip, position, volumeMultiplayer * _volume);

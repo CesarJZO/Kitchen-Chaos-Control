@@ -14,7 +14,7 @@ namespace CodeMonkey.KitchenChaosControl.KitchenCounters
             OnAnyCut = null;
         }
 
-        public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
+        public event EventHandler<IHasProgress.ProgressChangedEventArgs> OnProgressChanged;
         public event EventHandler OnCut;
 
         [SerializeField] private CuttingRecipe[] cuttingRecipes;
@@ -30,7 +30,7 @@ namespace CodeMonkey.KitchenChaosControl.KitchenCounters
                     player.GetKitchenObject().SetAndTeleportToParent(this);
                     _cuttingProgress = 0;
                     var cuttingRecipe = GetRecipeWithInput(GetKitchenObject().Data);
-                    OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+                    OnProgressChanged?.Invoke(this, new IHasProgress.ProgressChangedEventArgs
                     {
                         progressNormalized = _cuttingProgress / (float)cuttingRecipe.CuttingProgressRequired
                     });
@@ -73,7 +73,7 @@ namespace CodeMonkey.KitchenChaosControl.KitchenCounters
 
             // Check if the cutting progress is enough to slice the object
             var cuttingRecipe = GetRecipeWithInput(kitchenObject.Data);
-            OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+            OnProgressChanged?.Invoke(this, new IHasProgress.ProgressChangedEventArgs
             {
                 progressNormalized = _cuttingProgress / (float) cuttingRecipe.CuttingProgressRequired
             });

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using CodeMonkey.KitchenChaosControl.Management;
 using UnityEngine;
 
 namespace CodeMonkey.KitchenChaosControl.KitchenCounters
@@ -6,9 +6,14 @@ namespace CodeMonkey.KitchenChaosControl.KitchenCounters
     [RequireComponent(typeof(AudioSource))]
     public class StoveCounterSound : MonoBehaviour
     {
-        [SerializeField]private StoveCounter stoveCounter;
+        [SerializeField] private StoveCounter stoveCounter;
+
+        [SerializeField] private float warningSoundTime;
+        [SerializeField, Range(0f, 1f)] private float burnShowProgressPercentage;
 
         private AudioSource _audioSource;
+        private float _warningSoundTimer;
+        private bool _playWarningSound;
 
         private void Awake()
         {
@@ -17,16 +22,37 @@ namespace CodeMonkey.KitchenChaosControl.KitchenCounters
 
         private void Start()
         {
-            stoveCounter.OnStateChanged += StoveCounter_OnStateChanged;
+            stoveCounter.OnStateChanged += StoveCounterOnStateChanged;
+            stoveCounter.OnProgressChanged += StoveCounterOnProgressChanged;
         }
 
-        private void StoveCounter_OnStateChanged(object sender, StoveCounter.OnStateChangedEventArgs e)
+        private void StoveCounterOnStateChanged(object sender, StoveCounter.StateChangedEventArgs e)
         {
-            var playSound = e.state is StoveCounter.State.Frying or StoveCounter.State.Fried;
+            bool playSound = e.state is StoveCounter.State.Frying or StoveCounter.State.Fried;
             if (playSound)
                 _audioSource.Play();
             else
                 _audioSource.Stop();
+        }
+
+        private void StoveCounterOnProgressChanged(object sender, IHasProgress.ProgressChangedEventArgs e)
+        {
+            _playWarningSound = e.progressNormalized >= burnShowProgressPercentage && stoveCounter.IsFried;
+
+        }
+
+        private void Update()
+        {
+            if (!_playWarningSound) return;
+
+            if (_warningSoundTimer <= 0f)
+            {
+                _warningSoundTimer = warningSoundTime;
+
+                SoundManager.Instance.PlayWarningSound(stoveCounter.transform.position);
+            }
+
+            _warningSoundTimer -= Time.deltaTime;
         }
     }
 }
