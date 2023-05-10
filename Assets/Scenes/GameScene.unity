@@ -2466,7 +2466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countdownToStartTime: 3
-  gamePlayTime: 20
+  gamePlayTime: 100
 --- !u!4 &388808675
 Transform:
   m_ObjectHideFlags: 0
