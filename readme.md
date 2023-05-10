@@ -10,6 +10,8 @@ The main goal of this project is to practice **production-quality** code where a
 
 *\- Copilot*
 
+All code is in the [Scripts](./Assets/Scripts/) folder.
+
 Course: [Code Monkey](https://youtu.be/AmGSEH7QcDg)
 
 ## Features
