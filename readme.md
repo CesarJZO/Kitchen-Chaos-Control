@@ -19,8 +19,7 @@ Course: [Code Monkey](https://youtu.be/AmGSEH7QcDg)
 - Full keyboard and gamepad support
 - Rebindable keys
 - Stick sensitivity
-- Save system
-- Complex interactions
+- Save systemq
 
 ## Screenshots
 
